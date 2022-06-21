@@ -12,3 +12,7 @@ body{
     margin: auto;
     overflow: hidden;
 }
+
+.instructions{
+    font-size : 24px;
+}
