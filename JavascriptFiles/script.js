@@ -4,6 +4,8 @@ let teamNmb;
 function formSubmit1(){
     //Take the teamNmb and Passes it into the data validation function for that function
     teamNmb = document.getElementById("teamNmb").value;
+    // This is so that this variable can be accessed in the different files of the website
+    localStorage.setItem("teamNmb", teamNmb);
     let checked = numberCheck(teamNmb);
 
     // This if statement reloads the page and exits the function to allow the user to enter a valid TeamNmb 
@@ -14,14 +16,12 @@ function formSubmit1(){
 
     //This is the code to take the tournamentType entered from the form
     tournamentType = document.getElementById("type").value;
+
     
     // This following code creates the array to the value of the amount of teams the user entered
     teams = createArray(teamNmb);
-    var teamNames = JSON.parse(localStorage.getItem("teamNames"));
-    console.log(teamNames);
 
     //The code below is used to load the user to the next page, as all that is needed from this page has been complete
-    console.log("Hello");
     window.location.href = "teamInput.html";
 
     return false;
