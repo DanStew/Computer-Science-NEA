@@ -29,7 +29,7 @@ function formSubmit1(){
 
 // This is the function that makes sure that the TeamNmb meets the requirements
 function numberCheck(teamNmb){
-    if (teamNmb >= 2 && teamNmb<=20){
+    if (teamNmb > 2 && teamNmb<20){
         return true;
     }
     alert("Team Number must be between 2 and 20");
