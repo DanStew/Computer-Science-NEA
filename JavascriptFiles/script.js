@@ -20,6 +20,10 @@ function formSubmit1(){
     var teamNames = JSON.parse(localStorage.getItem("teamNames"));
     console.log(teamNames);
 
+    //The code below is used to load the user to the next page, as all that is needed from this page has been complete
+    console.log("Hello");
+    window.location.href = "teamInput.html";
+
     return false;
 }
 
