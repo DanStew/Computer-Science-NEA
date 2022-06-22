@@ -33,6 +33,18 @@
     <h1>League Startup Page</h1>
     <p class="instructions" >Enter the amount of teams (between 1 and 20) and Enter the Type of Tournament wanted</p>
 
+    <!-- The HTML code needed for the form to be submitted on this page-->
+    <div></div>
+    <form onSubmit="return formSubmit1()">
+            <input id="teamNmb" type="text" placeholder="Enter amount of teams...">
+            <select id = "type" name = "type">
+                <option value="roundRobin">Round Robin</option>
+                <option value="knockout">Knockout</option>
+            </select>
+            <div></div>
+            <input type="submit"> 
+    </form>
+
     <div class="container"></div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </body>

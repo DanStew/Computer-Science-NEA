@@ -16,3 +16,7 @@ body{
 .instructions{
     font-size : 24px;
 }
+
+.submit{
+    text-align: center;
+}
