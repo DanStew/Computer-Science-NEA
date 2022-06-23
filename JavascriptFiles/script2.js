@@ -10,7 +10,7 @@ function formSetup(){
         let teamNmbs = new Array(teamNmb)
 
 
-        for (let i=0 ; i<=teamsNmbs.length-1 ; i++){
+        for (let i=0 ; i<=teamNmb-1 ; i++){
             teamNmbs[i] = new teamArray();
         }
         
@@ -21,8 +21,8 @@ function formSetup(){
 
         //This is the code, for this example, to populate the array
         //It will also show the option elements to the number in which the user wanted the amount of teams
-        for (let i=1 ; i<=teamNmbs.length ; i++){
-            teamNmbs[i-1].setTeamName("Team" + i);
+        for (let i=1 ; i<=teamNmb-1 ; i++){
+            teamNmbs[i-1].setTeamName("Team");
             document.getElementById("teamNmb"+i).style.display = "";
             document.getElementById("teamNmb"+i).innerHTML = teamNmbs[i-1].getTeamName();
         }
@@ -32,7 +32,7 @@ function formSetup(){
     }
 
     // THis is the code to output the contents of the array to the option elements
-    for (let i=1 ; i<=20 ; i++){
+    for (let i=0 ; i<=teamNmb-1 ; i++){
         document.getElementById("teamNmb"+i).innerHTML = teamNmbs[i-1].getTeamName();
     }
 
