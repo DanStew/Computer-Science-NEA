@@ -22,11 +22,13 @@ function formSubmit1(){
     // This following code creates the array to the value of the amount of teams the user entered
     teams = createArray(teamNmb);
 
+    // This is the code to store the arrayCounter variable in localStorage to be used in the next page
+    localStorage.setItem("arrayCounter",JSON.stringify(1));
+
     //The code below is used to load the user to the next page, as all that is needed from this page has been complete
     window.location.href = "teamInput.html";
 
-    // This is the code to store the arrayCounter variable in localStorage to be used in the next page
-    localStorage.setItem("arrayCounter",JSON.stringify(1));
+   
 
     return false;
 }

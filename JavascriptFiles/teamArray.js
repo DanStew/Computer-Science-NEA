@@ -1,6 +1,7 @@
 class teamArray{
 
     constructor(){
+        console.log("Entered constructor")
         this.array = new Array[8]
         this.standing = 0
         this.wins = 0
@@ -29,5 +30,9 @@ class teamArray{
 
     getTeamName(){
         return this.array[1];
+    }
+
+    sayHello(){
+        console.log("Hello")
     }
 }
