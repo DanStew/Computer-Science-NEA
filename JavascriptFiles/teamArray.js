@@ -2,7 +2,9 @@ class teamArray{
 
     constructor(){
         console.log("Entered constructor")
-        this.array = new Array[8]
+        this.array = Array[10]
+        this.teamNmb = ""
+        this.teamName = ""
         this.standing = 0
         this.wins = 0
         this.draws = 0
@@ -11,28 +13,38 @@ class teamArray{
         this.gf = 0
         this.ga = 0
         this.gd = 0
+        this.updateArray()
     }
 
     updateArray(){
-        this.array[0] = this.standing
-        this.array[1] = this.wins
-        this.array[2] = this.draws
-        this.array[3] = this.losses
-        this.array[4] = this.pts
-        this.array[5] = this.gf
-        this.array[6] = this.ga
-        this.array[7] = this.gd      
+        this.array[0] = this.teamNmb;
+        this.array[1] = this.teamName;
+        this.array[2] = this.standing
+        this.array[3] = this.wins
+        this.array[4] = this.draws
+        this.array[5] = this.losses
+        this.array[6] = this.pts
+        this.array[7] = this.gf
+        this.array[8] = this.ga
+        this.array[9] = this.gd      
     }
 
     setTeamName(newName){
-        this.array[1] = newName;
+        this.teamName = newName;
+        this.teamNmb = ("Team " + i + " - " + this.teamName)
+        this.updateArray()
     }
 
     getTeamName(){
-        return this.array[1];
+        return this.teamName;
     }
 
-    sayHello(){
-        console.log("Hello")
+    setTeamNmb(teamNmb){
+        this.teamNmb = ("Team " + teamNmb); 
+        this.updateArray();
+    }
+
+    getTeamNmb(){
+        return this.teamNmb;
     }
 }
