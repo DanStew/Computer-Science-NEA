@@ -2,8 +2,11 @@ class teamArray{
 
     constructor(){
         console.log("Entered constructor")
-        this.array = Array[10]
-        this.teamNmb = ""
+        let teamNmbCount = JSON.parse(localStorage.getItem("teamNmbCount"));
+        if (teamNmbCount == null){
+            teamNmbCount = 1
+        }
+        this.teamNmb = "Team " + teamNmbCount;
         this.teamName = ""
         this.standing = 0
         this.wins = 0
@@ -13,26 +16,12 @@ class teamArray{
         this.gf = 0
         this.ga = 0
         this.gd = 0
-        this.updateArray()
-    }
-
-    updateArray(){
-        this.array[0] = this.teamNmb;
-        this.array[1] = this.teamName;
-        this.array[2] = this.standing
-        this.array[3] = this.wins
-        this.array[4] = this.draws
-        this.array[5] = this.losses
-        this.array[6] = this.pts
-        this.array[7] = this.gf
-        this.array[8] = this.ga
-        this.array[9] = this.gd      
+        localStorage.setItem("teamNmbCount", JSON.stringify(teamNmb+1))
     }
 
     setTeamName(newName){
         this.teamName = newName;
-        this.teamNmb = ("Team " + i + " - " + this.teamName)
-        this.updateArray()
+        this.teamNmb = (this.teamNmb + " - " + this.teamName)
     }
 
     getTeamName(){
@@ -41,7 +30,6 @@ class teamArray{
 
     setTeamNmb(teamNmb){
         this.teamNmb = ("Team " + teamNmb); 
-        this.updateArray();
     }
 
     getTeamNmb(){

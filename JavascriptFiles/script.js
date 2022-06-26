@@ -18,17 +18,11 @@ function formSubmit1(){
     tournamentType = document.getElementById("type").value;
     localStorage.setItem("tournamentType", tournamentType);
 
-    
-    // This following code creates the array to the value of the amount of teams the user entered
-    teams = createArray(teamNmb);
-
     // This is the code to store the arrayCounter variable in localStorage to be used in the next page
     localStorage.setItem("arrayCounter",JSON.stringify(1));
 
     //The code below is used to load the user to the next page, as all that is needed from this page has been complete
     window.location.href = "teamInput.html";
-
-   
 
     return false;
 }
@@ -40,14 +34,4 @@ function numberCheck(teamNmb){
     }
     alert("Team Number must be between 2 and 20");
     return false;
-}
-
-// This is the function that will create the array for the team names to be stored in
-function createArray(teamNmb){
-    let teamNames = new Array(teamNmb);
-    for (let i=1 ; i<=teamNmb; i++){
-        teamNames[i-1] = "Team " + i;
-    }
-    localStorage.setItem("teamNames", JSON.stringify(teamNames));
-    return;
 }
