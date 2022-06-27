@@ -20,12 +20,48 @@ class teamArray{
         this.teamNmb = ("Team " + this.teamNmbCounter +  " - " + this.teamName)
     }
 
+    getTeamNmb(){
+        return this.teamNmb;
+    }
+
+    getTeamNmbCounter(){
+        return this.teamNmbCounter;
+    }
+
     getTeamName(){
         return this.teamName;
     }
 
-    getTeamNmb(){
-        return this.teamNmb;
+    getStanding(){
+        return this.standing;
+    }
+
+    getWins(){
+        return this.wins;
+    }
+
+    getDraws(){
+        return this.draws;
+    }
+
+    getLosses(){
+        return this.losses;
+    }
+
+    getGf(){
+        return this.gf;
+    }
+
+    getGa(){
+        return this.ga;
+    }
+
+    getGd(){
+        return this.gd;
+    }
+
+    getPts(){
+        return this.pts;
     }
 
     //Code to transfer all the objects data into a JSON string
