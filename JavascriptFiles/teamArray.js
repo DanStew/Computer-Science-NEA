@@ -20,6 +20,8 @@ class teamArray{
         this.teamNmb = ("Team " + this.teamNmbCounter +  " - " + this.teamName)
     }
 
+
+    //Methods to get all of the attributes in the method so that they can be accessed from outside the class
     getTeamNmb(){
         return this.teamNmb;
     }
@@ -64,8 +66,4 @@ class teamArray{
         return this.pts;
     }
 
-    //Code to transfer all the objects data into a JSON string
-    toJson = function() {
-        return JSON.stringify({teamNmb: this.teamNmb , teamName: this.teamName , standing : this.standing , wins : this.wins , draws : this.draws, losses: this.losses, pts : this.pts ,gf: this.gf, ga: this.ga, gd: this.gd});
-    };
 }

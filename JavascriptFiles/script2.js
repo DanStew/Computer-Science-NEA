@@ -32,11 +32,7 @@ function formSetup(){
         storeObjects(teamNmbs);
     } 
 
-    /*teamNmbs = JSON.parse(localStorage.getItem("teamNmbs"));
-    for (i=0 ; i<=teamNmb-1 ; i++){
-        teamNmbs[i] = fromJson(teamNmbs[i]);
-    }*/
-
+    //Code to make the array of objects
     teamNmbs = remakeObjects()
 
     //This is the code to hide all of the select options
@@ -55,7 +51,20 @@ function formSetup(){
 }
 
 function formSubmit2(){
-    newName = document.getElementById("teamName").value;
+    //Collect the name enter in the right hand side of the form
+    let newName = document.getElementById("teamName").value;
+
+    //Collect the index position of the item selected in the select
+    var index = document.getElementById("teamNmbSelected").selectedIndex;
+    
+    //Make the array of objects from the class
+    let teamNmbs = remakeObjects();
+
+    //Change the value of the team selected to the new value
+    teamNmbs[index].setTeamName(newName);
+    
+    //Store the changes to local storage
+    storeObjects(teamNmbs)
 }
 
 //Function to test that changes to the value of the array will be saved (TEST FUNCTION)
@@ -70,13 +79,7 @@ function formTest(){
     window.location.href = "teamInput.html"
 }
 
-
-//Code to take all of the JSON strings and make them into new objects again so that the functions can be used
-fromJson = function(data) {
-    var data = JSON.parse(data)
-    return new teamArray(data.teamNmb, data.teamName, data.standing, data.wins , data.draws, data.losses, data.pts, data.gf, data.ga, data.gd);
-};
-
+//The function to store all of the attributes of the objects in the array to local storage so they can be saved
 function storeObjects(objectArray){
     console.log(objectArray[0].getTeamNmb())
     let teamNmb = JSON.parse(localStorage.getItem("teamNmb"))
@@ -95,6 +98,7 @@ function storeObjects(objectArray){
     }
 }
 
+//Function to put back together the array of instances of the class with the saved data
 function remakeObjects(){
     let teamNmb = JSON.parse(localStorage.getItem("teamNmb"))
     let teamNmbs = new Array(teamNmb)
