@@ -28,6 +28,7 @@ class teamArray{
         return this.teamNmb;
     }
 
+    //Code to transfer all the objects data into a JSON string
     toJson = function() {
         return JSON.stringify({teamNmb: this.teamNmb , teamName: this.teamName , standing : this.standing , wins : this.wins , draws : this.draws, losses: this.losses, pts : this.pts ,gf: this.gf, ga: this.ga, gd: this.gd});
     };

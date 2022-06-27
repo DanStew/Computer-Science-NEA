@@ -6,15 +6,14 @@ function formSetup(){
     let arrayCounter = JSON.parse(localStorage.getItem("arrayCounter"));
     let teamNmb = JSON.parse(localStorage.getItem("teamNmb"));
 
-    let teamNmbs = JSON.parse(localStorage.getItem("teamNmbs"));
+    /*let teamNmbs = JSON.parse(localStorage.getItem("teamNmbs"));
     for (i=0 ; i<=teamNmb-1 ; i++){
         teamNmbs[i] = fromJson(teamNmbs[i]);
-    }
+    }*/
 
 
     //This is the function to setup the objects for each team
     if (arrayCounter == 1){
-        console.log("entered if")
         console.log(teamNmb)
         teamNmbs = new Array(teamNmb)
 
@@ -32,7 +31,7 @@ function formSetup(){
         }
 
         //This is the code to increment the arrayCounter variable so this code isn't accessed again
-        localStorage.setItem("arrayCounter", JSON.stringify(2))
+        localStorage.setItem("arrayCounter", JSON.stringify(1))
 
         for (let i=1 ; i<=teamNmb ; i++){
             teamNmbs[i-1].toJson();
@@ -56,15 +55,7 @@ function formSetup(){
 }
 
 function formSubmit2(){
-    let newName = document.getElementById("teamName").value;
-    let teamNmbSelect = document.getElementById( "teamNmbSelected" );
-    let teamNmb =  teamNmbSelect.options[teamNmbSelect.selectedIndex].value;
-    console.log(teamNmb)
-    let teamNmbs = JSON.parse(localStorage.getItem("teamNmbs"));
-    for (i=0 ; i<=teamNmb-1 ; i++){
-        teamNmbs[i] = fromJson(teamNmbs[i]);
-    }
-
+    newName = document.getElementById("teamName").value;
 }
 
 //Function to test that changes to the value of the array will be saved (TEST FUNCTION)
