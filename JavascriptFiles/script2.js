@@ -34,9 +34,10 @@ function formSetup(){
         localStorage.setItem("arrayCounter", JSON.stringify(1))
 
         for (let i=1 ; i<=teamNmb ; i++){
-            teamNmbs[i-1].toJson();
+            let teamNmbData = teamNmbs[i-1].toJson();
+            console.log(teamNmbData)
+            localStorage.setItem("teamNmbData" + i,teamNmbData)
         }
-        localStorage.setItem("teamNmbs",teamNmbs)
     } 
 
     //This is the code to hide all of the select options
@@ -73,6 +74,7 @@ function formTest(){
 
 //Code to take all of the JSON strings and make them into new objects again so that the functions can be used
 fromJson = function(data) {
+    var data = JSON.parse(data)
     return new teamArray(data.teamNmb, data.teamName, data.standing, data.wins , data.draws, data.losses, data.pts, data.gf, data.ga, data.gd);
 };
 
