@@ -1,7 +1,6 @@
 class teamArray{
 
     constructor(pTeamNmb, pTeamNmbCounter, pTeamName, pStanding, pWins, pDraws, pLosses, pPts, pGf, pGa, pGd){
-        console.log("Entered constructor")
         this.teamNmb = pTeamNmb;
         this.teamNmbCounter = pTeamNmbCounter 
         this.teamName = pTeamName;

@@ -118,4 +118,3 @@ function remakeObjects(){
     }
     return teamNmbs
 }
-
