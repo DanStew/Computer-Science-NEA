@@ -8,7 +8,7 @@ body{
     text-align: center;
 }
 .container{
-    width: 80%;
+    width: 100%;
     margin: auto;
     overflow: hidden;
 }
@@ -17,3 +17,15 @@ body{
     font-size : 24px;
 }
 
+td {
+    padding: 0 15px;
+  }
+
+table {
+    border-collapse: collapse;
+}
+
+tr { 
+    border: solid;
+    border-width: 1px 0;
+}

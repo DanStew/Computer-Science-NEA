@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="/CSSFiles/style.css" media="screen">
     
   </head>
-  <body>
+  <body onload="tableSetup()">
     <div class="container">
 
         <!-- The main title of the page -->
@@ -43,17 +43,17 @@
                 <!-- Your first column here -->
 
                 <!-- This is the code to make the table for the data to be stored in -->
-                <table style = "border: solid;">
+                <table style = "border: solid;"  frame=void rules=rows>
                     <tr>
                       <th>Standing</th>
                       <th>Team Name</th>
-                      <th class="wType" >W</th>
-                      <th class="wType" >D</th>
-                      <th class="wType" >L<th>
+                      <th >W</th>
+                      <th >D</th>
+                      <th>L<th> 
                       <th>GF</th>
                       <th>GA</th>
                       <th>GD</th>
-                      <th>Pts</th>
+                      <th>PTS</th>
                     </tr>
 
                     <tr class="team1">
@@ -62,6 +62,7 @@
                       <td id ="w1" class="team1" ></td>
                       <td id ="d1" class="team1" ></td>
                       <td id ="l1" class="team1" ></td>
+                      <td id ="err1" class="team1" ></td>
                       <td id ="gf1" class="team1" ></td>
                       <td id ="ga1" class="team1" ></td>
                       <td id ="gd1" class="team1" ></td>
@@ -74,6 +75,7 @@
                       <td id ="w2" class="team2" ></td>
                       <td id ="d2" class="team2" ></td>
                       <td id ="l2" class="team2" ></td>
+                      <td id ="err1" class="team1" ></td>
                       <td id ="gf2" class="team2" ></td>
                       <td id ="ga2" class="team2" ></td>
                       <td id ="gd2" class="team2" ></td>
@@ -86,6 +88,7 @@
                         <td id ="w3" class="team3" ></td>
                         <td id ="d3" class="team3" ></td>
                         <td id ="l3" class="team3" ></td>
+                        <td id ="err1" class="team1" ></td>
                         <td id ="gf3" class="team3" ></td>
                         <td id ="ga3" class="team3" ></td>
                         <td id ="gd3" class="team3" ></td>
@@ -98,6 +101,7 @@
                         <td id ="w4" class="team4" ></td>
                         <td id ="d4" class="team4" ></td>
                         <td id ="l4" class="team4" ></td>
+                        <td id ="err1" class="team1" ></td>
                         <td id ="gf4" class="team4" ></td>
                         <td id ="ga4" class="team4" ></td>
                         <td id ="gd4" class="team4" ></td>
@@ -110,6 +114,7 @@
                         <td id ="w5" class="team5" ></td>
                         <td id ="d5" class="team5" ></td>
                         <td id ="l5" class="team5" ></td>
+                        <td id ="err1" class="team1" ></td>
                         <td id ="gf5" class="team5" ></td>
                         <td id ="ga5" class="team5" ></td>
                         <td id ="gd5" class="team5" ></td>
@@ -122,6 +127,7 @@
                         <td id ="w6" class="team6" ></td>
                         <td id ="d6" class="team6" ></td>
                         <td id ="l6" class="team6" ></td>
+                        <td id ="err1" class="team1" ></td>
                         <td id ="gf6" class="team6" ></td>
                         <td id ="ga6" class="team6" ></td>
                         <td id ="gd6" class="team6" ></td>
@@ -134,6 +140,7 @@
                         <td id ="w7" class="team7" ></td>
                         <td id ="d7" class="team7" ></td>
                         <td id ="l7" class="team7" ></td>
+                        <td id ="err1" class="team1" ></td>
                         <td id ="gf7" class="team7" ></td>
                         <td id ="ga7" class="team7" ></td>
                         <td id ="gd7" class="team7" ></td>
@@ -146,6 +153,7 @@
                         <td id ="w8" class="team8" ></td>
                         <td id ="d8" class="team8" ></td>
                         <td id ="l8" class="team8" ></td>
+                        <td id ="err1" class="team1" ></td>
                         <td id ="gf8" class="team8" ></td>
                         <td id ="ga8" class="team8" ></td>
                         <td id ="gd8" class="team8" ></td>
@@ -158,6 +166,7 @@
                         <td id ="w9" class="team9" ></td>
                         <td id ="d9" class="team9" ></td>
                         <td id ="l9" class="team9" ></td>
+                        <td id ="err1" class="team1" ></td>
                         <td id ="gf9" class="team9" ></td>
                         <td id ="ga9" class="team9" ></td>
                         <td id ="gd9" class="team9" ></td>
@@ -170,6 +179,7 @@
                         <td id ="w10" class="team10" ></td>
                         <td id ="d10" class="team10" ></td>
                         <td id ="l10" class="team10" ></td>
+                        <td id ="err1" class="team1" ></td>
                         <td id ="gf10" class="team10" ></td>
                         <td id ="ga10" class="team10" ></td>
                         <td id ="gd10" class="team10" ></td>
@@ -182,6 +192,7 @@
                         <td id ="w11" class="team11" ></td>
                         <td id ="d11" class="team11" ></td>
                         <td id ="l11" class="team11" ></td>
+                        <td id ="err1" class="team1" ></td>
                         <td id ="gf11" class="team11" ></td>
                         <td id ="ga11" class="team11" ></td>
                         <td id ="gd11" class="team11" ></td>
@@ -194,6 +205,7 @@
                         <td id ="w12" class="team12" ></td>
                         <td id ="d12" class="team12" ></td>
                         <td id ="l12" class="team12" ></td>
+                        <td id ="err1" class="team1" ></td>
                         <td id ="gf12" class="team12" ></td>
                         <td id ="ga12" class="team12" ></td>
                         <td id ="gd12" class="team12" ></td>
@@ -206,6 +218,7 @@
                         <td id ="w13" class="team13" ></td>
                         <td id ="d13" class="team13" ></td>
                         <td id ="l13" class="team13" ></td>
+                        <td id ="err1" class="team1" ></td>
                         <td id ="gf13" class="team13" ></td>
                         <td id ="ga13" class="team13" ></td>
                         <td id ="gd13" class="team13" ></td>
@@ -218,6 +231,7 @@
                         <td id ="w14" class="team14" ></td>
                         <td id ="d14" class="team14" ></td>
                         <td id ="l14" class="team14" ></td>
+                        <td id ="err1" class="team1" ></td>
                         <td id ="gf14" class="team14" ></td>
                         <td id ="ga14" class="team14" ></td>
                         <td id ="gd14" class="team14" ></td>
@@ -230,6 +244,7 @@
                         <td id ="w15" class="team15" ></td>
                         <td id ="d15" class="team15" ></td>
                         <td id ="l15" class="team15" ></td>
+                        <td id ="err1" class="team1" ></td>
                         <td id ="gf15" class="team15" ></td>
                         <td id ="ga15" class="team15" ></td>
                         <td id ="gd15" class="team15" ></td>
@@ -242,6 +257,7 @@
                         <td id ="w16" class="team16" ></td>
                         <td id ="d16" class="team16" ></td>
                         <td id ="l16" class="team16" ></td>
+                        <td id ="err1" class="team1" ></td>
                         <td id ="gf16" class="team16" ></td>
                         <td id ="ga16" class="team16" ></td>
                         <td id ="gd16" class="team16" ></td>
@@ -254,6 +270,7 @@
                         <td id ="w17" class="team17" ></td>
                         <td id ="d17" class="team17" ></td>
                         <td id ="l17" class="team17" ></td>
+                        <td id ="err1" class="team1" ></td>
                         <td id ="gf17" class="team17" ></td>
                         <td id ="ga17" class="team17" ></td>
                         <td id ="gd17" class="team17" ></td>
@@ -266,6 +283,7 @@
                         <td id ="w18" class="team18" ></td>
                         <td id ="d18" class="team18" ></td>
                         <td id ="l18" class="team18" ></td>
+                        <td id ="err1" class="team1" ></td>
                         <td id ="gf18" class="team18" ></td>
                         <td id ="ga18" class="team18" ></td>
                         <td id ="gd18" class="team18" ></td>
@@ -278,6 +296,7 @@
                     <td id ="w19" class="team19" ></td>
                     <td id ="d19" class="team19" ></td>
                     <td id ="l19" class="team19" ></td>
+                    <td id ="err1" class="team1" ></td>
                     <td id ="gf19" class="team19" ></td>
                     <td id ="ga19" class="team19" ></td>
                     <td id ="gd19" class="team19" ></td>
@@ -290,6 +309,7 @@
                     <td id ="w20" class="team20" ></td>
                     <td id ="d20" class="team20" ></td>
                     <td id ="l20" class="team20" ></td>
+                    <td id ="err1" class="team1" ></td>
                     <td id ="gf20" class="team20" ></td>
                     <td id ="ga20" class="team20" ></td>
                     <td id ="gd20" class="team20" ></td>
@@ -302,7 +322,7 @@
               </div>
             <div class="col-md-6">
                 <!-- Your second column here -->
-
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis distinctio sequi omnis. Maxime, quia ipsa qui nihil distinctio numquam dolorem nemo dignissimos illo quibusdam est nam, provident quo totam fugiat, excepturi reprehenderit aut? Impedit ullam velit cumque accusantium illum. Dignissimos fugit quisquam consequuntur maxime consectetur voluptate assumenda, quas voluptates ab?
            </div>
         </div>
 
@@ -310,6 +330,7 @@
     <script src="/JavascriptFiles/script2.js"></script>
     <script src="/JavascriptFiles/teamArray.js"></script>
     <script src="/JavascriptFiles/script3.js"></script>
+    <script src="/JavascriptFiles/script.js"></script>
 
     </div>
   </body>

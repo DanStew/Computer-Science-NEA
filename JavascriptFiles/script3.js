@@ -1,3 +1,21 @@
+function tableSetup(){
+    let teamNmbs = remakeObjects();
+    let teamNmb = JSON.parse(localStorage.getItem("teamNmb"))
+    for (i=1 ; i<= teamNmb ; i++){
+        document.getElementById("standing"+i).innerHTML = teamNmbs[i-1].getStanding();
+        document.getElementById("team"+i).innerHTML = teamNmbs[i-1].getTeamName();
+        document.getElementById("w"+i).innerHTML = teamNmbs[i-1].getWins();
+        document.getElementById("d"+i).innerHTML = teamNmbs[i-1].getDraws();
+        document.getElementById("l"+i).innerHTML = teamNmbs[i-1].getLosses();
+        document.getElementById("ga"+i).innerHTML = teamNmbs[i-1].getGf();
+        document.getElementById("gd"+i).innerHTML = teamNmbs[i-1].getGa();
+        document.getElementById("pts"+i).innerHTML = teamNmbs[i-1].getGd();
+        document.getElementById("gf"+i).innerHTML = teamNmbs[i-1].getPts();
+    }
+    let nullClass = document.getElementsByClassName("err1");
+    nullClass[i].style.display = 'none';
+}
+
 function checkWebsite(){
     let tournamentType = localStorage.getItem("tournamentType")
     console.log(tournamentType)

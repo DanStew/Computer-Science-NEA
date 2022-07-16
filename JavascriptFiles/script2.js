@@ -17,7 +17,7 @@ function formSetup(){
         for (let i=0 ; i<=teamNmb-1 ; i++){     
             let pTeamNmbCounter = i+1
             let pTeamNmb = "Team " + pTeamNmbCounter        
-            teamNmbs[i] = new teamArray(pTeamNmb,pTeamNmbCounter,"",0,0,0,0,0,0,0,0);
+            teamNmbs[i] = new teamArray(pTeamNmb,pTeamNmbCounter,"",pTeamNmbCounter,0,0,0,0,0,0,0);
         }
 
         //This is the code, for this example, to populate the array

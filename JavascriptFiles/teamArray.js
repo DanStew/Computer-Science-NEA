@@ -19,6 +19,9 @@ class teamArray{
         this.teamNmb = ("Team " + this.teamNmbCounter +  " - " + this.teamName)
     }
 
+    setInitialStanding(pStanding){
+        this.standing = pStanding;
+    }
 
     //Methods to get all of the attributes in the method so that they can be accessed from outside the class
     getTeamNmb(){
