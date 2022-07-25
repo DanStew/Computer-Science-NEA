@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="/CSSFiles/style.css" media="screen">
     
   </head>
-  <body>
+  <body onload="knockoutSetup()"">
     <div class="container">
 
         <!-- The main title of the page -->
@@ -41,12 +41,34 @@
         <div class="modal-body row">
             <div class="col-md-6">
                 <!-- Your first column here -->
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores consequuntur asperiores excepturi quasi aliquid, quod, corporis reprehenderit nesciunt esse necessitatibus iste saepe molestiae repudiandae nostrum nihil ullam laborum doloremque placeat cum quidem provident non sunt. Velit nemo, repellat placeat nulla quisquam alias ex. Iure ut assumenda, fugiat modi sed itaque?
-             </div>
+                <!-- The html code for the layout and structure of the tournament -->
+                <table summary="Tournament Bracket" class="bracket">
+                  <tr>
+                      <th>Semi Finals</th>
+                      <th>Final</th>
+                      <th>Champion</th>
+                  </tr>
+                  <tr>
+                      <td> <!-- Top Semis --> <div id="topS"></div> </td>
+                      <td rowspan="2"> <!-- Top Final --> <div id="topF"></div> </td>
+                      <td rowspan="4"> <!-- Champion --> <div id="champ"></div> </td>
+                  </tr> 
+                  <tr>
+                      <td> <!-- Bottom Semis --> <div id="botS"></div> </td>
+                  </tr>
+                  <tr>
+                      <td> <!-- 2nd Semis --> <div id="2S"></div> </td>
+                      <td rowspan="2"> <!-- Bottom Finals --> <div id="botF"></div> </td>
+                  </tr>
+                  <tr>
+                      <td> <!-- 3rd Semis --> <div id="3S"></div> </td>
+                  </tr>
+                  </table>
+            </div>
             <div class="col-md-6">
                 <!-- Your second column here -->
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed nobis velit laboriosam praesentium aut esse quos voluptatem autem modi earum.
-               </div>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa quam fuga consequuntur dolores quo! Molestias natus cum possimus dignissimos! Minima, inventore quibusdam delectus repudiandae itaque expedita eligendi iusto et, at ad laboriosam ducimus amet cupiditate atque nisi porro non laudantium esse, ipsum doloremque aut quasi neque illo voluptate. Ducimus, iure.
+              </div>
         </div>
 
     <!-- Code to link the Javascript File to the document -->

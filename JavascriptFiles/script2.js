@@ -17,7 +17,7 @@ function formSetup(){
         for (let i=0 ; i<=teamNmb-1 ; i++){     
             let pTeamNmbCounter = i+1
             let pTeamNmb = "Team " + pTeamNmbCounter        
-            teamNmbs[i] = new teamArray(pTeamNmb,pTeamNmbCounter,"",pTeamNmbCounter,0,0,0,0,0,0,0);
+            teamNmbs[i] = new teamArray(pTeamNmb,pTeamNmbCounter,"",pTeamNmbCounter,0,0,0,0,0,0,0,0,0,0);
         }
 
         //This is the code, for this example, to populate the array
@@ -48,23 +48,49 @@ function formSetup(){
 
     //This is the code to store the teamNmbs array into local storage so it can be accessed again
     localStorage.setItem("teamNmbs", JSON.stringify(teamNmbs));
+
+    //Setting up the variable for the formSubmit2 function
+    localStorage.setItem("go", "true");
 }
 
 function formSubmit2(){
-    //Collect the name enter in the right hand side of the form
-    let newName = document.getElementById("teamName").value;
+    let go = localStorage.getItem("go")
+    if (go == "true"){
+        //Collect the name enter in the right hand side of the form
+        let newName = document.getElementById("teamName").value;
 
-    //Collect the index position of the item selected in the select
-    var index = document.getElementById("teamNmbSelected").selectedIndex;
-    
-    //Make the array of objects from the class
-    let teamNmbs = remakeObjects();
+        //Code to split down the team name into separate words and then check the characters in each individual word
+        let words = newName.split(" ");
+        console.log(words);
+        let length = words.length;
+        console.log(length);
+        for (i=0 ; i<= length-1 ; i++){
+            let wLength = words[i].length
+            if (wLength >= 19){
+                alert("Single word length must not be longer than 20 characters");
+                localStorage.setItem("go", "false");
+                window.location.href = "teamInput.html"
+                break;
+            }
+        }
 
-    //Change the value of the team selected to the new value
-    teamNmbs[index].setTeamName(newName);
+        go = localStorage.getItem("go");
+        if (go == "true"){
+            //Collect the index position of the item selected in the select
+            var index = document.getElementById("teamNmbSelected").selectedIndex;
     
-    //Store the changes to local storage
-    storeObjects(teamNmbs)
+            //Make the array of objects from the class
+            let teamNmbs = remakeObjects();
+
+            //Change the value of the team selected to the new value
+            teamNmbs[index].setTeamName(newName);
+
+            //Store the changes to local storage
+            storeObjects(teamNmbs)
+        }
+        
+    }
+    localStorage.setItem("go", "true")
 }
 
 //Function to test that changes to the value of the array will be saved (TEST FUNCTION)
@@ -95,6 +121,9 @@ function storeObjects(objectArray){
         localStorage.setItem("TeamNmb" + i + "Gf", JSON.stringify(objectArray[i-1].getGf()))
         localStorage.setItem("TeamNmb" + i + "Ga", JSON.stringify(objectArray[i-1].getGa()))
         localStorage.setItem("TeamNmb" + i + "Gd", JSON.stringify(objectArray[i-1].getGd()))
+        localStorage.setItem("TeamNmb" + i + "Semi", objectArray[i-1].getSemi())
+        localStorage.setItem("TeamNmb" + i + "Final", objectArray[i-1].getFinal())
+        localStorage.setItem("TeamNmb" + i + "Champion", objectArray[i-1].getChampion())
     }
 }
 
@@ -114,7 +143,10 @@ function remakeObjects(){
         let  pGf= JSON.parse(localStorage.getItem("TeamNmb" + i + "Gf"))
         let  pGa= JSON.parse(localStorage.getItem("TeamNmb" + i + "Ga"))
         let  pGd= JSON.parse(localStorage.getItem("TeamNmb" + i + "Gd"))
-        teamNmbs[i-1] = new teamArray(pTeamNmb, pTeamNmbCounter , pTeamName, pStanding, pWins, pDraws, pLosses, pPts, pGf, pGa, pGd)
+        let  pSemi= localStorage.getItem("TeamNmb" + i + "Semi")
+        let  pFinal= localStorage.getItem("TeamNmb" + i + "Final")
+        let  pChampion= localStorage.getItem("TeamNmb" + i + "Champion")
+        teamNmbs[i-1] = new teamArray(pTeamNmb, pTeamNmbCounter , pTeamName, pStanding, pWins, pDraws, pLosses, pPts, pGf, pGa, pGd, pSemi, pFinal, pChampion)
     }
     return teamNmbs
 }
