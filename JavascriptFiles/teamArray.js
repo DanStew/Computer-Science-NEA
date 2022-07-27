@@ -1,6 +1,6 @@
 class teamArray{
 
-    constructor(pTeamNmb, pTeamNmbCounter, pTeamName, pStanding, pWins, pDraws, pLosses, pPts, pGf, pGa, pGd, pSemi, pFinal, pChampion){
+    constructor(pTeamNmb, pTeamNmbCounter, pTeamName, pStanding, pWins, pDraws, pLosses, pPts, pGf, pGa, pGd, pQuarter, pSemi, pFinal, pChampion){
         this.teamNmb = pTeamNmb;
         this.teamNmbCounter = pTeamNmbCounter 
         this.teamName = pTeamName;
@@ -12,6 +12,7 @@ class teamArray{
         this.gf = pGf;
         this.ga = pGa;
         this.gd = pGd;
+        this.quarter = pQuarter // Boolean variable that's initially 0
         this.semi = pSemi; // Boolean variable that's initially 0
         this.final = pFinal; // Boolean variable that's initially 0
         this.champion = pChampion // Boolean variable that's initially 0
@@ -71,6 +72,10 @@ class teamArray{
         return this.pts;
     }
 
+    getQuarter(){
+        return this.quarter;
+    }
+
     getSemi(){
         return this.semi;
     }
@@ -81,6 +86,10 @@ class teamArray{
 
     getChampion(){
         return this.champion;
+    }
+
+    setQuarter(){
+        this.quarter = 1;
     }
 
     setSemi(){

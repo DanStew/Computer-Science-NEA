@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS - The code neeted in order to implement the Bootstrap Library into the code -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Fixture Generator</title>
+
+    <!-- Code to link the stylesheet to the document -->
+    <link rel="stylesheet" type="text/css" href="/CSSFiles/style.css" media="screen">
+    
+  </head>
+  <body onload="knockoutSetup(true)">
+    <div class="container">
+
+        <!-- The main title of the page -->
+        <h1>Fixture Generator</h1>
+
+        <!-- This is the code to display the navbar that will appear at the top of the pages-->
+        <!-- The code within the classes in bootstrap are used to help customise the Bootstrap elements-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="collapse navbar-collapse justify-content-center">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active"  href="index.html">League Startup Page (Reset Progress) <span class="sr-only"></span></a>
+                    <a class="nav-item nav-link active" href="teamInput.html">Team Input</a>
+                    <a class="nav-item nav-link active" href="checkWebsite.html">League Table and Fixtures</a>
+                    <a class="nav-item nav-link active" href="x">Results Input Page</a>
+                </div>
+            </div>
+      </nav>
+
+      <!-- The main header of the page -->
+      <br>
+      <h1>Knockout result and Fixture page</h1>
+
+        <!-- The code to split the page into columns for which the content to go -->
+        <div class="modal-body row">
+            <div class="col-md-6">
+                <!-- Your first column here -->
+                <!-- The html code for the layout and structure of the tournament -->
+                <table summary="Tournament Bracket" class="bracket">
+                  <tr>
+                      <th>Semi Finals</th>
+                      <th>Final</th>
+                      <th>Champion</th>
+                  </tr>
+                  <tr>
+                      <td> <!-- Top Semis --> <div id="topS"></div> </td>
+                      <td rowspan="2"> <!-- Top Final --> <div id="topF"></div> </td>
+                      <td rowspan="4"> <!-- Champion --> <div id="champ"></div> </td>
+                  </tr> 
+                  <tr>
+                      <td> <!-- Bottom Semis --> <div id="botS"></div> </td>
+                  </tr>
+                  <tr>
+                      <td> <!-- 2nd Semis --> <div id="2S"></div> </td>
+                      <td rowspan="2"> <!-- Bottom Finals --> <div id="botF"></div> </td>
+                  </tr>
+                  <tr>
+                      <td> <!-- 3rd Semis --> <div id="3S"></div> </td>
+                  </tr>
+                  </table>
+            </div>
+            <div class="col-md-6">
+                <!-- Your second column here -->
+                <!-- Tabs navs -->
+
+                <!-- Code to make the tabs for the knockout fixtures side of the website -->
+                <!-- Tabs navs -->
+                <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
+
+                  <!-- Code to make the first tab-->
+                  <!-- This one has a aria-controls attribute to link it to the content part below-->
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="ex1-tab-1" href="Knockoutr16.html" aria-controls="ex1-tabs-1" aria-selected="true"
+                    >Round of 16</a>
+                  </li>
+
+                  <!-- Code to make the second tab-->
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="ex1-tab-2" href="Knockoutquarter.html" aria-selected="false"
+                    >Quarter Finals</a>
+                  </li>
+
+                  <!-- Code to make the third tab-->
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="ex1-tab-3" href="Knockoutsemi.html" aria-selected="false"
+                    >Semi Finals</a>
+                  </li>
+
+                  <!-- Code to make the fourth tab-->
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="ex1-tab-4" href="Knockoutfinal.html" aria-selected="false"
+                    >Final</a>
+                  </li>
+                </ul>
+                <!-- Tabs navs -->
+
+                <!-- Tabs content -->
+                <div class="tab-content" id="ex1-content">
+                  <div class="tab-pane fade show active" id="ex1-tabs-1" aria-labelledby="ex1-tab-1">
+                    <h1>Round of Sixteen Fixtures</h1>
+                    <br>
+                    <div id="r16Fixture1"></div>
+                    <div id="r16Fixture2"></div>
+                    <div id="r16Fixture3"></div>
+                    <div id="r16Fixture4"></div>
+                    <div id="r16Fixture5"></div>
+                    <div id="r16Fixture6"></div>
+                    <div id="r16Fixture7"></div>
+                    <div id="r16Fixture8"></div>
+                  </div>
+                </div>
+                <!-- Tabs content -->
+              </div>
+        </div>
+
+    <!-- Code to link the Javascript File to the document -->
+    <script src="/JavascriptFiles/script2.js"></script>
+    <script src="/JavascriptFiles/teamArray.js"></script>
+    <script src="/JavascriptFiles/script3.js"></script>
+
+    </div>
+  </body>
+</html>

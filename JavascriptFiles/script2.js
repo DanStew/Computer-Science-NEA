@@ -14,10 +14,42 @@ function formSetup(){
         console.log(teamNmb)
         teamNmbs = new Array(teamNmb)
 
-        for (let i=0 ; i<=teamNmb-1 ; i++){     
-            let pTeamNmbCounter = i+1
-            let pTeamNmb = "Team " + pTeamNmbCounter        
-            teamNmbs[i] = new teamArray(pTeamNmb,pTeamNmbCounter,"",pTeamNmbCounter,0,0,0,0,0,0,0,0,0,0);
+        if (tournamentType == "knockout"){
+            if (teamNmb == 16){
+                for (let i=0 ; i<=teamNmb-1 ; i++){     
+                    let pTeamNmbCounter = i+1
+                    let pTeamNmb = "Team " + pTeamNmbCounter        
+                    teamNmbs[i] = new teamArray(pTeamNmb,pTeamNmbCounter,"",pTeamNmbCounter,0,0,0,0,0,0,0,0,0,0,0);
+                } 
+            }
+            if (teamNmb == 8){
+                for (let i=0 ; i<=teamNmb-1 ; i++){     
+                    let pTeamNmbCounter = i+1
+                    let pTeamNmb = "Team " + pTeamNmbCounter        
+                    teamNmbs[i] = new teamArray(pTeamNmb,pTeamNmbCounter,"",pTeamNmbCounter,0,0,0,0,0,0,0,1,1,1,0);
+                }  
+            }
+            if (teamNmb == 4){
+                for (let i=0 ; i<=teamNmb-1 ; i++){     
+                    let pTeamNmbCounter = i+1
+                    let pTeamNmb = "Team " + pTeamNmbCounter        
+                    teamNmbs[i] = new teamArray(pTeamNmb,pTeamNmbCounter,"",pTeamNmbCounter,0,0,0,0,0,0,0,0,1,1,0);
+                } 
+            }
+            if (teamNmb == 2){
+                for (let i=0 ; i<=teamNmb-1 ; i++){     
+                    let pTeamNmbCounter = i+1
+                    let pTeamNmb = "Team " + pTeamNmbCounter        
+                    teamNmbs[i] = new teamArray(pTeamNmb,pTeamNmbCounter,"",pTeamNmbCounter,0,0,0,0,0,0,0,0,0,1,0);
+                } 
+            }
+        }
+        else{
+            for (let i=0 ; i<=teamNmb-1 ; i++){     
+                let pTeamNmbCounter = i+1
+                let pTeamNmb = "Team " + pTeamNmbCounter        
+                teamNmbs[i] = new teamArray(pTeamNmb,pTeamNmbCounter,"",pTeamNmbCounter,0,0,0,0,0,0,0,0,0,0,0);
+            } 
         }
 
         //This is the code, for this example, to populate the array
@@ -121,6 +153,7 @@ function storeObjects(objectArray){
         localStorage.setItem("TeamNmb" + i + "Gf", JSON.stringify(objectArray[i-1].getGf()))
         localStorage.setItem("TeamNmb" + i + "Ga", JSON.stringify(objectArray[i-1].getGa()))
         localStorage.setItem("TeamNmb" + i + "Gd", JSON.stringify(objectArray[i-1].getGd()))
+        localStorage.setItem("TeamNmb" + i + "Quarter", objectArray[i-1].getQuarter())
         localStorage.setItem("TeamNmb" + i + "Semi", objectArray[i-1].getSemi())
         localStorage.setItem("TeamNmb" + i + "Final", objectArray[i-1].getFinal())
         localStorage.setItem("TeamNmb" + i + "Champion", objectArray[i-1].getChampion())
@@ -143,10 +176,11 @@ function remakeObjects(){
         let  pGf= JSON.parse(localStorage.getItem("TeamNmb" + i + "Gf"))
         let  pGa= JSON.parse(localStorage.getItem("TeamNmb" + i + "Ga"))
         let  pGd= JSON.parse(localStorage.getItem("TeamNmb" + i + "Gd"))
+        let  pQuarter= localStorage.getItem("TeamNmb" + i + "Quarter")
         let  pSemi= localStorage.getItem("TeamNmb" + i + "Semi")
         let  pFinal= localStorage.getItem("TeamNmb" + i + "Final")
         let  pChampion= localStorage.getItem("TeamNmb" + i + "Champion")
-        teamNmbs[i-1] = new teamArray(pTeamNmb, pTeamNmbCounter , pTeamName, pStanding, pWins, pDraws, pLosses, pPts, pGf, pGa, pGd, pSemi, pFinal, pChampion)
+        teamNmbs[i-1] = new teamArray(pTeamNmb, pTeamNmbCounter , pTeamName, pStanding, pWins, pDraws, pLosses, pPts, pGf, pGa, pGd, pQuarter, pSemi, pFinal, pChampion)
     }
     return teamNmbs
 }
