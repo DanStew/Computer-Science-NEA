@@ -15,10 +15,12 @@ function tableSetup(){
         document.getElementById("pts"+i).innerHTML = teamNmbs[i-1].getGd();
         document.getElementById("gf"+i).innerHTML = teamNmbs[i-1].getPts();
     }
+
+    generateRobin();
 }
 
 //Function to set up the knockout page of the website when it's needed
-function knockoutSetup(cont){
+function knockoutSetup(){
     
     //Code to get the names of the teams in order to put into the knockout structure
     let semiTeams = getSemiTeams();
@@ -34,11 +36,9 @@ function knockoutSetup(cont){
     document.getElementById("botF").innerHTML = finalTeams[1];
     document.getElementById("champ").innerHTML = champion;
 
-    
-    if (cont == true){
-        //Code to generate the array of fixtures needed for the website
-        let fixtures = generateKnockout();
-    }
+    //Code to generate and display the fixtures for the website to display
+    setValues();
+    displayFixtures();
 } 
 
 //Function to get the array of fixtures needed for the knockout structure
@@ -86,6 +86,70 @@ function generateKnockout(){
     }
 
     console.log(fixtures)
+    return fixtures;
+}
+
+//Function to generate and display the fixtures onto the website
+function displayFixtures(){
+
+    //Function to generate the fixtures
+    let fixtures = generateKnockout();
+
+    //Code to check the website and then display the fixtures for them
+    if (document.URL.includes("r16")){
+        document.getElementById("r16Fixture1").innerHTML = fixtures[0];
+        document.getElementById("r16Fixture2").innerHTML = fixtures[1];
+        document.getElementById("r16Fixture3").innerHTML = fixtures[2];
+        document.getElementById("r16Fixture4").innerHTML = fixtures[3];
+        document.getElementById("r16Fixture5").innerHTML = fixtures[4];
+        document.getElementById("r16Fixture6").innerHTML = fixtures[5];
+        document.getElementById("r16Fixture7").innerHTML = fixtures[6];
+        document.getElementById("r16Fixture8").innerHTML = fixtures[7];
+    }
+    if (document.URL.includes("quarter")){
+        document.getElementById("quarterFixture1").innerHTML = fixtures[0];
+        document.getElementById("quarterFixture2").innerHTML = fixtures[1];
+        document.getElementById("quarterFixture3").innerHTML = fixtures[2];
+        document.getElementById("quarterFixture4").innerHTML = fixtures[3];
+    }
+    if (document.URL.includes("semi")){
+        document.getElementById("semiFixture1").innerHTML = fixtures[0];
+        document.getElementById("semiFixture2").innerHTML = fixtures[1];
+    }
+    if (document.URL.includes("final")){
+        document.getElementById("finalFixture").innerHTML = fixtures;
+    }
+}
+
+function generateRobin(){
+    let teamNmbs = remakeObjects();
+    let teamNmb = JSON.parse(localStorage.getItem("teamNmb"));
+    let amount = (teamNmb * (teamNmb-1) / 2);
+    let fixtures = new Array(amount);
+    localStorage.setItem("fixtureNmb", JSON.stringify(0));
+    for (i=0 ; i<= teamNmb-1; i++){
+        let team1 = teamNmbs[i].getTeamName();
+        console.log("Entered large loop")
+        for (j=0 ; j<= teamNmb-1 ; j++){
+            console.log("Entered mini loop")
+            let fixtureNmb = JSON.parse(localStorage.getItem("fixtureNmb"));
+            console.log(j)
+            let team2 = teamNmbs[j].getTeamName();
+            let go = true;
+            if (team1 == team2){
+                go = false;
+            }
+            console.log(team2)
+            if (go == true){
+                let fixture = team1 + " v " + team2;
+                console.log(fixture)
+                fixtures[fixtureNmb] = fixture;
+                fixtureNmb++;
+                localStorage.setItem("fixtureNmb", JSON.stringify(fixtureNmb));
+            }
+        }
+    }
+    console.log(fixtures)
 }
 
 //Code to generate the names of the teams in the quarters
@@ -127,6 +191,7 @@ function getSemiTeams(){
             localStorage.setItem("semiNmb" , JSON.stringify(semiNmb))
         }
     }
+    console.log(semiTeams)
     return semiTeams;
 }
 
@@ -197,6 +262,7 @@ function setValues(){
     teamNmbs[0].setSemi();
     teamNmbs[1].setFinal();
     teamNmbs[0].setFinal();
+    storeObjects(teamNmbs);
 }
 
 //Function to put back together the array of instances of the class with the saved data
