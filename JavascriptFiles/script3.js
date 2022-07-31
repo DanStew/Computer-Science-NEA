@@ -2,11 +2,18 @@
 function tableSetup(){
     let teamNmbs = remakeObjects();
     let teamNmb = JSON.parse(localStorage.getItem("teamNmb"))
+    let nmb = teamNmb
+    nmb++
+    for (i=nmb ; i<= 20 ; i++){
+        console.log("Entered hidden")
+        document.getElementById("button"+i).style.visibility = "hidden"
+    }
 
     //For loop to input all of the information from the objects into the table
     for (i=1 ; i<= teamNmb ; i++){
         document.getElementById("standing"+i).innerHTML = teamNmbs[i-1].getStanding();
         document.getElementById("team"+i).innerHTML = teamNmbs[i-1].getTeamName();
+        document.getElementById("button"+i).innerHTML = teamNmbs[i-1].getTeamName();
         document.getElementById("w"+i).innerHTML = teamNmbs[i-1].getWins();
         document.getElementById("d"+i).innerHTML = teamNmbs[i-1].getDraws();
         document.getElementById("l"+i).innerHTML = teamNmbs[i-1].getLosses();
@@ -16,6 +23,7 @@ function tableSetup(){
         document.getElementById("gf"+i).innerHTML = teamNmbs[i-1].getPts();
     }
 
+    //Function to generate the fixtures for the round robin tournament
     generateRobin();
 }
 
@@ -121,35 +129,40 @@ function displayFixtures(){
     }
 }
 
+//Function to generate the fixtures for the round robin side of the tournament
 function generateRobin(){
     let teamNmbs = remakeObjects();
     let teamNmb = JSON.parse(localStorage.getItem("teamNmb"));
+
+    //Calculating the amount of fixtures needed and making an array for it
     let amount = (teamNmb * (teamNmb-1) / 2);
     let fixtures = new Array(amount);
+
+    //Variable to keep count on what number in the fixtures array we are on
     localStorage.setItem("fixtureNmb", JSON.stringify(0));
+
+    //For loop to run through all the teams in the table
     for (i=0 ; i<= teamNmb-1; i++){
         let team1 = teamNmbs[i].getTeamName();
-        console.log("Entered large loop")
+
+        //For loop to run through all the teams in the table again 
         for (j=0 ; j<= teamNmb-1 ; j++){
-            console.log("Entered mini loop")
             let fixtureNmb = JSON.parse(localStorage.getItem("fixtureNmb"));
-            console.log(j)
             let team2 = teamNmbs[j].getTeamName();
+
+            //Code to make sure that the team is unique and arent the same
             let go = true;
             if (team1 == team2){
                 go = false;
             }
-            console.log(team2)
             if (go == true){
                 let fixture = team1 + " v " + team2;
-                console.log(fixture)
                 fixtures[fixtureNmb] = fixture;
                 fixtureNmb++;
                 localStorage.setItem("fixtureNmb", JSON.stringify(fixtureNmb));
             }
         }
     }
-    console.log(fixtures)
 }
 
 //Code to generate the names of the teams in the quarters

@@ -90,6 +90,12 @@ function formSubmit2(){
     if (go == "true"){
         //Collect the name enter in the right hand side of the form
         let newName = document.getElementById("teamName").value;
+        let length1 = newName.length;
+        if (length1 > 30){
+            alert("The teams name must not be longer than 30 characters")
+            localStorage.setItem("go", "false");
+            window.location.href = "teamInput.html"
+        }
 
         //Code to split down the team name into separate words and then check the characters in each individual word
         let words = newName.split(" ");
@@ -99,7 +105,7 @@ function formSubmit2(){
         for (i=0 ; i<= length-1 ; i++){
             let wLength = words[i].length
             if (wLength >= 19){
-                alert("Single word length must not be longer than 20 characters");
+                alert("Single word length must not be longer than 18 characters");
                 localStorage.setItem("go", "false");
                 window.location.href = "teamInput.html"
                 break;
