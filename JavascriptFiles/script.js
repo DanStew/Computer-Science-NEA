@@ -17,7 +17,6 @@ function formSubmit1(){
         window.location.href = "index.html"
         return null;
     }
-
     
 
     // This is the code to store the arrayCounter variable in localStorage to be used in the next page

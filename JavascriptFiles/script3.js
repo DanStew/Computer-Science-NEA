@@ -5,7 +5,6 @@ function tableSetup(){
     let nmb = teamNmb
     nmb++
     for (i=nmb ; i<= 20 ; i++){
-        console.log("Entered hidden")
         document.getElementById("button"+i).style.visibility = "hidden"
     }
 
@@ -22,9 +21,16 @@ function tableSetup(){
         document.getElementById("pts"+i).innerHTML = teamNmbs[i-1].getGd();
         document.getElementById("gf"+i).innerHTML = teamNmbs[i-1].getPts();
     }
+}
 
-    //Function to generate the fixtures for the round robin tournament
-    generateRobin();
+//Function to set up the specific team pages of the website
+function teamSetup(){
+
+        //Function to generate the fixtures for the round robin tournament
+        let fixtures = generateRobin();
+
+        //Function to display the fixtures to the website
+        displayRobin(fixtures);
 }
 
 //Function to set up the knockout page of the website when it's needed
@@ -44,6 +50,17 @@ function knockoutSetup(){
     document.getElementById("botF").innerHTML = finalTeams[1];
     document.getElementById("champ").innerHTML = champion;
 
+    let reload = localStorage.getItem("reload", "true");
+    if (reload == "true"){
+        console.log("reloaded page")
+        window.location.href = "Knockoutr16.html"
+        
+        localStorage.setItem("reload", "false")
+    }
+
+    //Function to hide the sections of the knockout tournament not needed
+    hideSection();
+
     //Code to generate and display the fixtures for the website to display
     setValues();
     displayFixtures();
@@ -58,6 +75,7 @@ function generateKnockout(){
     //Code to generate the round of sixteen fixtures
     // The document.URL.includes parts makes the code more efficient as it doesn't make all of the fixtures for all of the games it only makes the fixtures in which will be shown
     if ((teamNmb >= 16) && (document.URL.includes("Knockoutr16")) ) {
+        console.log("Entered round of 16")
         fixtures = new Array(8)
         for (let i=0 ; i<= 7 ; i++){
             let team1 = teamNmbs[i].getTeamName();
@@ -72,6 +90,7 @@ function generateKnockout(){
     if (teamNmb >= 8 && (document.URL.includes("Knockoutquarter"))){
         fixtures = new Array(4)
         let quarterTeams = getQuarterTeams();
+        console.log(quarterTeams)
         fixtures[0] = quarterTeams[0] + " v " + quarterTeams[7]
         fixtures[1] = quarterTeams[1] + " v " + quarterTeams[6]
         fixtures[2] = quarterTeams[2] + " v " + quarterTeams[5]
@@ -82,6 +101,7 @@ function generateKnockout(){
     if (teamNmb >= 4 && (document.URL.includes("Knockoutsemi"))){
         fixtures = new Array(2)
         let semiTeams = getSemiTeams();
+        console.log(semiTeams)
         fixtures[0] = semiTeams[0] + " v " + semiTeams[3]
         fixtures[1] = semiTeams[1] + " v " + semiTeams[2]
     }
@@ -90,6 +110,7 @@ function generateKnockout(){
     //It isn't wrapped in a for loop as all knockout tournments will need this
     if (document.URL.includes("Knockoutfinal")){
         let finalTeams = getFinalTeams();
+        console.log(finalTeams)
         fixtures = finalTeams[0] + " v " + finalTeams[1]
     }
 
@@ -101,10 +122,13 @@ function generateKnockout(){
 function displayFixtures(){
 
     //Function to generate the fixtures
+    setValues();
     let fixtures = generateKnockout();
+    console.log(fixtures)
+    let teamNmb = JSON.parse(localStorage.getItem("teamNmb"));
 
     //Code to check the website and then display the fixtures for them
-    if (document.URL.includes("r16")){
+    if (document.URL.includes("r16") && (teamNmb >= 16)){
         document.getElementById("r16Fixture1").innerHTML = fixtures[0];
         document.getElementById("r16Fixture2").innerHTML = fixtures[1];
         document.getElementById("r16Fixture3").innerHTML = fixtures[2];
@@ -163,10 +187,65 @@ function generateRobin(){
             }
         }
     }
+
+    return fixtures;
+}
+
+//Function to display the round robin fixtures to the website
+function displayRobin(fixtures){
+
+    //Code to set the base values for the fixture numbers
+    localStorage.setItem("homeFixture", JSON.stringify(0));
+    localStorage.setItem("awayFixture", JSON.stringify(0));
+
+    let teamNmbs = remakeObjects();
+    let teamNmb = JSON.parse(localStorage.getItem("teamNmb"));
+    console.log(teamNmb)
+    let homeFixtures = new Array(teamNmb-1);
+    let awayFixtures = new Array(teamNmb-1);
+    let teamName;
+
+    //Code to check the website name and get the relevant team name
+    for (i=1 ; i<=teamNmb ; i++){
+        if (document.URL.includes("team"+i)) {
+            teamName = teamNmbs[i-1].getTeamName();
+        }
+    }
+
+    let amount = (teamNmb * (teamNmb-1));
+    console.log(amount)
+
+    //Console to check each fixture for the name of the relevant team
+    for (i=0 ; i<= amount-1 ; i++){
+        let fixture = fixtures[i];
+        let teams = fixture.split(" v ");
+        //Checking to see if the fixture is home
+        if (teams[0] == teamName){
+            let homeNmb = JSON.parse(localStorage.getItem("homeFixture"));
+            homeFixtures[homeNmb] = fixture;
+            homeNmb++;
+            localStorage.setItem("homeFixture", JSON.stringify(homeNmb));
+        }
+        //Checking to see if the fixture is away
+        if (teams[1] == teamName){
+            let awayNmb = JSON.parse(localStorage.getItem("awayFixture"));
+            awayFixtures[awayNmb] = fixture;
+            awayNmb++;
+            localStorage.setItem("awayFixture", JSON.stringify(awayNmb));
+        }
+    }
+
+    for (i=1 ; i<=teamNmb-1 ; i++){
+        document.getElementById("homematch"+i).innerHTML = homeFixtures[i-1];
+        document.getElementById("awaymatch"+(i+19)).innerHTML = awayFixtures[i-1];
+    }
 }
 
 //Code to generate the names of the teams in the quarters
 function getQuarterTeams(){
+
+    localStorage.setItem("quarterNmb", JSON.stringify(0))
+
     let teamNmbs = remakeObjects();
     let teamNmb = JSON.parse(localStorage.getItem("teamNmb"));
     let quarterTeams = new Array(8);
@@ -188,18 +267,25 @@ function getQuarterTeams(){
 
 //Code to generate the names of the teams in the semis
 function getSemiTeams(){
+
+    localStorage.setItem("semiNmb" , JSON.stringify(0))
+
     let teamNmbs = remakeObjects();
     let teamNmb = JSON.parse(localStorage.getItem("teamNmb"));
     let semiTeams = new Array(4);
+    console.log(semiTeams)
     //Goes through all of the objects to see whether semi is 1 and therefore they are in the semi
     for (i=0 ; i<= teamNmb-1 ; i++){
         let semiCheck = teamNmbs[i].getSemi();
+        console.log(semiCheck)
         if (semiCheck == 1 ){
-            let semiNmb = JSON.parse(localStorage.getItem("quarterNmb"));
+            let semiNmb = JSON.parse(localStorage.getItem("semiNmb"));
             if (semiNmb == null){
                 semiNmb = 0;
             }
+            console.log(semiNmb)
             semiTeams[semiNmb] = teamNmbs[i].getTeamName();
+            console.log(semiTeams)
             semiNmb++
             localStorage.setItem("semiNmb" , JSON.stringify(semiNmb))
         }
@@ -210,6 +296,9 @@ function getSemiTeams(){
 
 //Code to generate the names of the teams in the final
 function getFinalTeams(){
+
+    localStorage.setItem("finalNmb", JSON.stringify(0))
+
     let teamNmbs = remakeObjects();
     let teamNmb = JSON.parse(localStorage.getItem("teamNmb"));
     let finalTeams = new Array(2);
@@ -234,6 +323,7 @@ function getChampion(){
     let teamNmbs = remakeObjects();
     let teamNmb = JSON.parse(localStorage.getItem("teamNmb"));
     let champion;
+    
     //Goes through all of the objects to see whether champion is 1 and therefore they are the champion
     for (i=0 ; i<= teamNmb-1 ; i++){
         let championCheck = teamNmbs[i].getChampion();
@@ -246,8 +336,9 @@ function getChampion(){
 
 //Code to check which of the two websites should be run
 function checkWebsite(){
+    localStorage.setItem("reload", "true")
+
     let tournamentType = localStorage.getItem("tournamentType")
-    console.log(tournamentType)
     if (tournamentType == "knockout"){
         window.location.href = "Knockoutr16.html"
     }
@@ -275,12 +366,29 @@ function setValues(){
     teamNmbs[0].setSemi();
     teamNmbs[1].setFinal();
     teamNmbs[0].setFinal();
+    teamNmbs[0].setChampion();
     storeObjects(teamNmbs);
+}
+
+//Function to hide the parts of the knockout tournament in which aren't needed
+function hideSection(){
+    let teamNmb = JSON.parse(localStorage.getItem("teamNmb"));
+    if (teamNmb == 2){
+        document.getElementById("ex1-tab-1").style.visibility = "hidden"
+        document.getElementById("ex1-tab-2").style.visibility = "hidden"
+        document.getElementById("ex1-tab-3").style.visibility = "hidden"
+    }
+    else if (teamNmb == 4){
+        document.getElementById("ex1-tab-1").style.visibility = "hidden"
+        document.getElementById("ex1-tab-2").style.visibility = "hidden"
+    }
+    else if (teamNmb == 8){
+        document.getElementById("ex1-tab-1").style.visibility = "hidden"
+    }
 }
 
 //Function to put back together the array of instances of the class with the saved data
 function remakeObjects(){
-    console.log("HI")
     let teamNmb = JSON.parse(localStorage.getItem("teamNmb"))
     let teamNmbs = new Array(teamNmb)
     for (let i=1 ; i<=teamNmb ; i++){
