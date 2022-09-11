@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="/CSSFiles/style.css" media="screen">
     
   </head>
-  <body onload="formSetup()">
+  <body>
     <h1>Fixture Generator</h1>
 
     <!-- This is the code to display the navbar that will appear at the top of the pages-->
@@ -33,37 +33,21 @@
 
     <!-- Text for the Title and Instructions of the Website -->
     <br>
-    <h1>Team Input Page</h1>
-    <p class="instructions" >Select the Team Number in which you want to change and then enter the name of the team that you want to replace it with</p>
-    <p class="instructions" >One single word must not have more than 18 characters in it</p>
-    <p class="instructions" >The teams name must also not be larger than 30 characters</p>
+    <h1>League Startup Page</h1>
+    <p class="instructions" >Enter the amount of teams (between 2 and 20) and Enter the Type of Tournament wanted</p>
+    <br>
+    <p class="instructions" >Knockout tournaments are only allowed to have 2 , 4, 8 or 16 teams in them</p>
+    <p class="instructions" >Any other amount will be rejected by the system</p>
+    <br>
 
     <!-- The HTML code needed for the form to be submitted on this page-->
     <div></div>
-    <form onSubmit="return formSubmit2()">
-            <select id="teamNmbSelected">
-                <option id="teamNmb1"></option>
-                <option id="teamNmb2"></option>
-                <option id="teamNmb3"></option>
-                <option id="teamNmb4"></option>
-                <option id="teamNmb5"></option>
-                <option id="teamNmb6"></option>
-                <option id="teamNmb7"></option>
-                <option id="teamNmb8"></option>
-                <option id="teamNmb9"></option>
-                <option id="teamNmb10"></option>
-                <option id="teamNmb11"></option>
-                <option id="teamNmb12"></option>
-                <option id="teamNmb13"></option>
-                <option id="teamNmb14"></option>
-                <option id="teamNmb15"></option>
-                <option id="teamNmb16"></option>
-                <option id="teamNmb17"></option>
-                <option id="teamNmb18"></option>
-                <option id="teamNmb19"></option>
-                <option id="teamNmb20"></option>
-            </select id = "type" name = "type">
-            <input id="teamName" type="text" placeholder="New Name...">
+    <form onSubmit="return formSubmit1()">
+            <input id="teamNmb" type="text" placeholder="Enter amount of teams...">
+            <select id = "type" name = "type">
+                <option value="roundRobin">Round Robin</option>
+                <option value="knockout">Knockout</option>
+            </select>
             <div></div>
             <input type="submit"> 
     </form>
@@ -72,7 +56,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <!-- Code to link the Javascript File to the document -->
     <script src="/JavascriptFiles/script.js"></script>
-    <script src="/JavascriptFiles/script2.js"></script>
-    <script src="/JavascriptFiles/teamArray.js"></script>
   </body>
 </html>
