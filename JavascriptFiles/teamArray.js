@@ -18,16 +18,17 @@ class teamArray{
         this.champion = pChampion // Boolean variable that's initially 0
     }
 
+    //Methods to get all of the attributes in the method so that they can be accessed from outside the class
+
     setTeamName(newName){
         this.teamName = newName;
         this.teamNmb = ("Team " + this.teamNmbCounter +  " - " + this.teamName)
     }
 
-    setInitialStanding(pStanding){
-        this.standing = pStanding;
+    getTeamName(){
+        return this.teamName;
     }
 
-    //Methods to get all of the attributes in the method so that they can be accessed from outside the class
     getTeamNmb(){
         return this.teamNmb;
     }
@@ -35,73 +36,5 @@ class teamArray{
     getTeamNmbCounter(){
         return this.teamNmbCounter;
     }
-
-    getTeamName(){
-        return this.teamName;
-    }
-
-    getStanding(){
-        return this.standing;
-    }
-
-    getWins(){
-        return this.wins;
-    }
-
-    getDraws(){
-        return this.draws;
-    }
-
-    getLosses(){
-        return this.losses;
-    }
-
-    getGf(){
-        return this.gf;
-    }
-
-    getGa(){
-        return this.ga;
-    }
-
-    getGd(){
-        return this.gd;
-    }
-
-    getPts(){
-        return this.pts;
-    }
-
-    getQuarter(){
-        return this.quarter;
-    }
-
-    getSemi(){
-        return this.semi;
-    }
-
-    getFinal(){
-        return this.final;
-    }
-
-    getChampion(){
-        return this.champion;
-    }
-
-    setQuarter(){
-        this.quarter = 1;
-    }
-
-    setSemi(){
-        this.semi = 1;
-    }
-
-    setFinal(){
-        this.final = 1;
-    }
-
-    setChampion(){
-        this.champion = 1 ;
-    }
-
+    
 }
