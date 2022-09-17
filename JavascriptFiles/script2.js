@@ -172,7 +172,6 @@ function storeObjects(objectArray){
             localStorage.setItem("TeamNmb" + i + "Gf", JSON.stringify(objectArray[i-1].getGf()))
             localStorage.setItem("TeamNmb" + i + "Ga", JSON.stringify(objectArray[i-1].getGa()))
             localStorage.setItem("TeamNmb" + i + "Gd", JSON.stringify(objectArray[i-1].getGd()))
-            localStorage.setItem("TeamNmb" + i + "Quarter", objectArray[i-1].getQuarter())
         }
     }
 }
