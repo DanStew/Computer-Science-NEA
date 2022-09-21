@@ -26,24 +26,53 @@ class roundTeam extends teamArray{
         return this.wins;
     }
 
+    setWins(){
+        this.wins++;
+    }
+
     getDraws(){
         return this.draws;
+    }
+
+    setDraws(){
+        this.draws++;
     }
 
     getLosses(){
         return this.losses;
     }
 
+    setLosses(){
+        this.losses++;
+    }
+
+    setGf(goalsScored){
+        this.gf = this.gf + goalsScored;
+    }
+
     getGf(){
         return this.gf;
+    }
+
+    setGa(goalsConceded){
+        this.ga = this.ga + goalsConceded;
     }
 
     getGa(){
         return this.ga;
     }
 
+    setGd(){
+        this.gd = this.gf - this.ga;
+    }
+
     getGd(){
         return this.gd;
+    }
+
+    setPts(){
+        wPts = this.pts * 3
+        this.pts = wPts + this.draws;
     }
 
     getPts(){
