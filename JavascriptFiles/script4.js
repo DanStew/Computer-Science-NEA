@@ -16,6 +16,7 @@ function storeObjects(objectArray){
             localStorage.setItem("TeamNmb" + i + "Semi", objectArray[i-1].getSemi())
             localStorage.setItem("TeamNmb" + i + "Final", objectArray[i-1].getFinal())
             localStorage.setItem("TeamNmb" + i + "Champion", objectArray[i-1].getChampion())
+
         }
     }
     else{

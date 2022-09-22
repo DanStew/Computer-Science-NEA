@@ -160,6 +160,7 @@ function generateRobin(){
 
     //Calculating the amount of fixtures needed and making an array for it
     let amount = (teamNmb * (teamNmb-1) / 2);
+    console.log(amount)
     let fixtures = new Array(amount);
 
     //Variable to keep count on what number in the fixtures array we are on
@@ -400,6 +401,7 @@ function storeObjects(objectArray){
             localStorage.setItem("TeamNmb" + i + "Semi", objectArray[i-1].getSemi())
             localStorage.setItem("TeamNmb" + i + "Final", objectArray[i-1].getFinal())
             localStorage.setItem("TeamNmb" + i + "Champion", objectArray[i-1].getChampion())
+            localStorage.setItem("TeamNmb" + i + "Champion", objectArray[i-1].getStanding())
         }
     }
     else{
