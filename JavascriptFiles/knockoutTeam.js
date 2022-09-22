@@ -1,3 +1,4 @@
+//Class to make the objects for the teams in the knockout tournament
 class knockoutTeam extends teamArray{
 
     //Constructor to make initialise all the variables needed for making the knockoutTeam object

@@ -1,5 +1,7 @@
+//Class to make the objects for the round robin teams
 class roundTeam extends teamArray{
 
+    //Constructor to make the object (and accept the parameters) to make the object
     constructor(pTeamNmb, pTeamNmbCounter, pTeamName, pStanding, pWins, pDraws, pLosses, pPts, pGf, pGa, pGd){
         super(pTeamNmb, pTeamNmbCounter, pTeamName)
         this.standing = pStanding;
@@ -13,6 +15,7 @@ class roundTeam extends teamArray{
     }
 
     //Methods needed to get and set the variables in this class
+    //Not all set methods in this need a parameter as some of them will only ever increase by one when called (eg wins)
 
     setStanding(pStanding){
         this.standing = pStanding;

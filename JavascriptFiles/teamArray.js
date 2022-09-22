@@ -1,5 +1,7 @@
+//Class to make the superclass for the new subclass 
 class teamArray{
 
+    //Constructor to initialise all the attributes for this class
     constructor(pTeamNmb, pTeamNmbCounter, pTeamName){
         this.teamNmb = pTeamNmb;
         this.teamNmbCounter = pTeamNmbCounter 
