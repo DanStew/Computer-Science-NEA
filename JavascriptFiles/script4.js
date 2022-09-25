@@ -2,31 +2,65 @@
 function form3Setup(){
     console.log("Form3")
     let teamNmb = JSON.parse(localStorage.getItem("teamNmb"))
-    let fixtures = generateRobin();
-    let amount = (teamNmb * (teamNmb - 1) / 2)
+    let tournamentType = localStorage.getItem("tournamentType");
+    let fixtures;
+    let amount;
+
+    //Code to generate the fixtures and fixture amount for the different types of tournaments
+    if (tournamentType == "knockout"){
+        fixtures = generateKnockout(teamNmb);
+        amount = findKnockoutAmount();
+        console.log(amount)
+    }
+    else{
+        fixtures = generateRobin();
+        amount = (teamNmb * (teamNmb - 1));
+    } 
+    
 
     //This is the code to hide all of the select options
-    for (let i=1 ; i<=190 ; i++){
+    for (let i=1 ; i<=380 ; i++){
         console.log("Hide")
         document.getElementById("fixture"+i).style.display = "none";
     }
 
+    //Code to unhide select options of available fixtures and input the fixture name into it
     for (let i=1 ; i<=amount ; i++){
         console.log("Fixture")
         document.getElementById("fixture"+i).style.display = "";
-        document.getElementById("fixture"+i).innerHTML = fixture[i-1];
+        document.getElementById("fixture"+i).innerHTML = fixtures[i-1];
     } 
+}
+
+//Finds the amount of fixtures in a knockout tournament
+function findKnockoutAmount(){
+    let teamNmb = JSON.parse(localStorage.getItem("teamNmb"))
+    if (teamNmb == 16){
+        amount = 8;
+        return amount;
+    }
+    else if (teamNmb == 8){
+        amount = 4;
+        return amount;
+    }
+    else if (teamNmb == 4){
+        amount = 2;
+        return amount;
+    }
+    else{
+        amount = 1; 
+        return amount;
+    }
 }
 
 
 //Function to generate the fixtures for the round robin side of the tournament
 function generateRobin(){
     let teamNmbs = remakeObjects();
-    console.log(teamNmbs)
     let teamNmb = JSON.parse(localStorage.getItem("teamNmb"));
 
     //Calculating the amount of fixtures needed and making an array for it
-    let amount = (teamNmb * (teamNmb-1) / 2);
+    let amount = (teamNmb * (teamNmb-1));
     console.log(amount)
     let fixtures = new Array(amount);
 
@@ -61,13 +95,14 @@ function generateRobin(){
 
 //Function to get the array of fixtures needed for the knockout structure
 function generateKnockout(){
+    console.log("entered knockout")
     let teamNmbs = remakeObjects();
     let teamNmb = JSON.parse(localStorage.getItem("teamNmb"));
-    let fixtures
+    let fixtures;
 
     //Code to generate the round of sixteen fixtures
     // The document.URL.includes parts makes the code more efficient as it doesn't make all of the fixtures for all of the games it only makes the fixtures in which will be shown
-    if ((teamNmb >= 16) && (document.URL.includes("Knockoutr16")) ) {
+    if ((teamNmb >= 16) && (document.URL.includes("Knockoutr16") || document.URL.includes("resultInput")) ) {
         console.log("Entered round of 16")
         fixtures = new Array(8)
         for (let i=0 ; i<= 7 ; i++){
@@ -80,7 +115,7 @@ function generateKnockout(){
     }
     
     //Code to generate the fixtures for the quarter finals
-    if (teamNmb >= 8 && (document.URL.includes("Knockoutquarter"))){
+    else if (teamNmb >= 8 && (document.URL.includes("Knockoutquarter")|| document.URL.includes("resultInput"))){
         fixtures = new Array(4)
         let quarterTeams = getQuarterTeams();
         console.log(quarterTeams)
@@ -91,7 +126,7 @@ function generateKnockout(){
     }
     
     //Code to generate the fixtures for the semiFinals
-    if (teamNmb >= 4 && (document.URL.includes("Knockoutsemi"))){
+    else if (teamNmb >= 4 && (document.URL.includes("Knockoutsemi")|| document.URL.includes("resultInput"))){
         fixtures = new Array(2)
         let semiTeams = getSemiTeams();
         console.log(semiTeams)
@@ -101,10 +136,11 @@ function generateKnockout(){
     
     //Code to generate the fixture for the final
     //It isn't wrapped in a for loop as all knockout tournments will need this
-    if (document.URL.includes("Knockoutfinal")){
+    else if (document.URL.includes("Knockoutfinal")|| document.URL.includes("resultInput")){
         let finalTeams = getFinalTeams();
         console.log(finalTeams)
-        fixtures = finalTeams[0] + " v " + finalTeams[1]
+        fixtures = new Array(1);
+        fixtures[0] = finalTeams[0] + " v " + finalTeams[1]
     }
 
     console.log(fixtures)
@@ -124,7 +160,7 @@ function storeObjects(objectArray){
             localStorage.setItem("TeamNmb" + i + "Semi", objectArray[i-1].getSemi())
             localStorage.setItem("TeamNmb" + i + "Final", objectArray[i-1].getFinal())
             localStorage.setItem("TeamNmb" + i + "Champion", objectArray[i-1].getChampion())
-
+            localStorage.setItem("TeamNmb" + i + "Champion", objectArray[i-1].getStanding())
         }
     }
     else{
@@ -147,7 +183,7 @@ function storeObjects(objectArray){
 //Function to put back together the array of instances of the class with the saved data
 function remakeObjects(){
     let tournamentType = localStorage.getItem("tournamentType");
-    let teamNmb = localStorage.getItem("teamNmb");
+    let teamNmb = JSON.parse(localStorage.getItem("teamNmb"))
     let teamNmbs = new Array(teamNmb)
     if (tournamentType == "knockout"){
         for (i=1 ; i<=teamNmb ; i++){
