@@ -16,6 +16,8 @@ function form3Setup(){
         fixtures = generateRobin();
         amount = (teamNmb * (teamNmb - 1));
     } 
+
+    
     
 
     //This is the code to hide all of the select options
@@ -30,7 +32,85 @@ function form3Setup(){
         document.getElementById("fixture"+i).style.display = "";
         document.getElementById("fixture"+i).innerHTML = fixtures[i-1];
     } 
+
+    //Code to hide the select options of any teams that have already been selected
+    let hideFixtures = JSON.parse(localStorage.getItem("hideFixtures"));
+    if (hideFixtures != null){
+        for (i=0 ; i<= amount-1 ; i++){
+            if (hideFixtures[i] != undefined){
+                console.log("hide fixture");
+                console.log(hideFixtures[i])
+                document.getElementById(hideFixtures[i]).style.display = "none";
+                document.getElementById(hideFixtures[i]).innerHTML = "Fixture should be hidden";
+            }
+        }
+    }
 }
+
+
+//Function to deal with the inputs and call all necessary functions and actions required from the input of a form
+function formSubmit3(){
+    //Variables to store all of the variables needed to be collected from the form
+    fixture = document.getElementById("fixtureSelected").value;
+
+    //Collect the index of the option selected
+    fixtureNmb = document.getElementById("fixtureSelected").selectedIndex;
+    //Normalise it with the form of the option id's, to get the id of the option selected
+    fixtureNmb = "fixture" + (fixtureNmb);
+
+    homeGoals = document.getElementById("homeGoals").value;
+    awayGoals = document.getElementById("awayGoals").value;
+
+    //Function to make sure that all the inputs in the form have been selected
+    inputsCorrect = checkGoals(homeGoals, awayGoals)
+    fixtureCorrect = checkFixtures(fixture)
+    if (inputsCorrect == true && fixtureCorrect == true){
+
+        //Function to tell the system that the fixture has already been selected, so it won't be shown again
+        formIdCollect(fixtureNmb);
+
+    }
+    else{
+        window.location.href = "resultInput.html";
+    }
+}
+
+//Function to make sure that the user has inputted a value into the form, rather than it being empty
+function checkGoals(homeGoals, awayGoals){
+    if (homeGoals.length >= 1 && awayGoals.length >= 1){
+        return true;
+    }
+    alert("All form inputs must have values entered");
+    return false;
+}
+
+function checkFixtures(fixture){
+    if (fixture == "Select Fixture"){
+        alert("You must select a fixture to input the result for");
+        return false;
+    }
+    return true;
+}
+
+//Function to collect the id of the option selected, so it can be hidden if neccesary
+function formIdCollect(fixtureNmb){
+    let teamNmb = JSON.parse(localStorage.getItem("teamNmb"));
+    let amount = (teamNmb * (teamNmb - 1));
+    hideFixtures = JSON.parse(localStorage.getItem("hideFixtures"));
+    console.log(hideFixtures);
+    if (hideFixtures == null){
+        hideFixtures = new Array(amount);
+    }
+    for (i=0 ; i<= amount-1 ; i++){
+        if (hideFixtures[i] == undefined){
+            hideFixtures[i] = fixtureNmb
+            break;
+        }
+    }
+    localStorage.setItem("hideFixtures", JSON.stringify(hideFixtures));
+}
+
+
 
 //Finds the amount of fixtures in a knockout tournament
 function findKnockoutAmount(){

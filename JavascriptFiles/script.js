@@ -18,6 +18,8 @@ function formSubmit1(){
         return null;
     }
     
+    //Code to delete the hideFixtures array from memory when a new league is made
+    localStorage.removeItem("hideFixtures");
 
     // This is the code to store the arrayCounter variable in localStorage to be used in the next page
     localStorage.setItem("arrayCounter",JSON.stringify(1));
