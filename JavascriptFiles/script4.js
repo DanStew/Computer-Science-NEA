@@ -85,7 +85,7 @@ function formSubmit3(){
 function checkGoals(homeGoals, awayGoals){
     let tournamentType = localStorage.getItem("tournamentType");
     if (homeGoals.length >= 1 && awayGoals.length >= 1){
-        if (knockout == "knockout"){
+        if (tournamentType == "knockout"){
             if (homeGoals == awayGoals){
                 alert("Knockout Games can't draw");
                 return false;
