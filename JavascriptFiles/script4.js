@@ -17,9 +17,6 @@ function form3Setup(){
         amount = (teamNmb * (teamNmb - 1));
     } 
 
-    
-    
-
     //This is the code to hide all of the select options
     for (let i=1 ; i<=380 ; i++){
         console.log("Hide")
@@ -58,6 +55,7 @@ function formSubmit3(){
     //Normalise it with the form of the option id's, to get the id of the option selected
     fixtureNmb = "fixture" + (fixtureNmb);
 
+    //Collects the goals from the inputs
     homeGoals = document.getElementById("homeGoals").value;
     awayGoals = document.getElementById("awayGoals").value;
 
@@ -69,6 +67,14 @@ function formSubmit3(){
         //Function to tell the system that the fixture has already been selected, so it won't be shown again
         formIdCollect(fixtureNmb);
 
+        //Function to process the results from the scores inputted
+        let tournamentType = localStorage.getItem("tournamentType");
+        if (tournamentType == "knockout"){
+            knockoutScoreProcess(fixture,homeGoals, awayGoals);
+        }
+        else{
+            roundScoreProcess(fixture,homeGoals, awayGoals);
+        }
     }
     else{
         window.location.href = "resultInput.html";
@@ -77,8 +83,18 @@ function formSubmit3(){
 
 //Function to make sure that the user has inputted a value into the form, rather than it being empty
 function checkGoals(homeGoals, awayGoals){
+    let tournamentType = localStorage.getItem("tournamentType");
     if (homeGoals.length >= 1 && awayGoals.length >= 1){
-        return true;
+        if (knockout == "knockout"){
+            if (homeGoals == awayGoals){
+                alert("Knockout Games can't draw");
+                return false;
+            }
+            return true;
+        }
+        else{
+            return true;
+        }
     }
     alert("All form inputs must have values entered");
     return false;
@@ -110,7 +126,57 @@ function formIdCollect(fixtureNmb){
     localStorage.setItem("hideFixtures", JSON.stringify(hideFixtures));
 }
 
+function returnHomeTeam(fixture){
+    let teams = fixture.split(" v ");
+    return teams[0];
+}
 
+function returnAwayTeam(fixture){
+    let teams = fixture.split(" v ");
+    return teams[1];
+}
+
+function roundScoreProcess(fixture,homeGoals,awayGoals){
+    let teamNmbs = remakeObjects();
+    let teamNmb = JSON.parse(localStorage.getItem("teamNmb"));
+
+    //Code to get the individual names of the teams in the fixture
+    let homeTeam = returnHomeTeam(fixture);
+    let awayTeam = returnAwayTeam(fixture);
+    console.log(homeTeam)
+    console.log(awayTeam)
+
+    let homeTeamObject;
+    let awayTeamObject;
+
+    //Code to find the object of the team with the correlated team name
+    for (let i=0 ; i<= teamNmb-1; i++){
+        let objectTeamName = teamNmbs[i].getTeamName()
+        if (objectTeamName == homeTeam){
+            homeTeamObject = teamNmbs[i]
+        }
+        else if (objectTeamName == awayTeam){
+            awayTeamObject = teamNmbs[i]
+        }
+    }
+    
+    if (homeGoals > awayGoals){
+        console.log(homeTeamObject.getTeamName());
+        console.log(awayTeamObject.getTeamName());
+    }
+    else if (homeGoals == awayGoals){
+
+    }
+    else{
+
+    }
+    storeObjects()
+}
+
+function knockoutScoreProcess(fixture,homeGoals, awayGoals){
+    let homeTeam = returnHomeTeam(fixture);
+    let awayTeam = returnAwayTeam(fixture);
+}
 
 //Finds the amount of fixtures in a knockout tournament
 function findKnockoutAmount(){
