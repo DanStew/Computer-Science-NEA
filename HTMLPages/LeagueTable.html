@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="/CSSFiles/style.css" media="screen">
     
   </head>
+    <!-- Onload function to setup the table with all other its values and names, from Javascript-->
   <body onload="tableSetup()">
     <div class="container">
 
@@ -43,8 +44,25 @@
                 <!-- Your first column here -->
 
                 <!-- This is the code to make the table for the data to be stored in -->
-                <table style = "border: solid;" >
+                <table style = "border: solid;">
                     <tr>
+                      <!-- Code for the headers of the columns on the table-->
+                      <!-- The aims of the table is to store all the individuals statistics stored about the teams into one table -->
+                      <!-- Therefore the headers directly correlate to the statistics stored in the team objects -->
+                      <!-- Acronymns have been used in the header to create for easier formatting of the website (Especially when on smaller screens)-->
+
+                      <!-- The acronyms can be described below -->
+                      <!-- W = Wins -->
+                      <!-- D = Draws -->
+                      <!-- L = Losses -->
+                      <!-- GF = Goals For (Goals that team has scored) -->
+                      <!-- GA = Goals Against (Goals that team has conceded) -->
+                      <!-- GD = Goal Difference (The difference between Goals For and Goals Against) -->
+                      <!-- PTS = Points (The points that team has got from its wins, draws and losses) -->
+
+                      <!-- These acronyms are again described for the user below in the text below the table, which can be seen on the website, so that the user also knows what any acronyms mean -->
+                      <!-- This will avoid confusion for the user when using the system -->
+
                       <th>Standing</th>
                       <th>Team Name</th>
                       <th >W</th>
@@ -56,7 +74,14 @@
                       <th>PTS</th>
                     </tr>
 
-                    <tr class="team1">
+                    <!-- Below is the code for each individual row in the table -->
+                    <!-- Each team name will have its own individual ids for each attribute that is stored about it, from its team object, so that this information can then be outputted to the website using javascript -->
+                    <!-- Each team also has its own individual class which groups all code and data for each individual team -->
+                    <!-- The main benefit of this is that the information can be hidden from the user, using Javascript, in case the information isn't relevant or is blank -->
+                    <!-- For instance, team 20's attributes would be empty in a 4 team round robin tournament, so there is no point of showing its information -->
+
+                    <!-- Code for the row for team 1, including its unique ids and team class -->
+                    <tr class="team1 ">
                       <td id="standing1" class="team1"></td>
                       <td id ="team1" class="team1" ></td>
                       <td id ="w1" class="team1" ></td>
@@ -69,6 +94,7 @@
                       <td id ="pts1" class="team1" ></td>
                     </tr>
 
+                    <!-- Code for the row for team 2, including its unique ids and team class -->
                     <tr class="team2">
                       <td id="standing2" class="team2"></td>
                       <td id ="team2" class="team2" ></td>
@@ -82,6 +108,7 @@
                       <td id ="pts2" class="team2" ></td>
                     </tr>
 
+                    <!-- Code for the row for team 3, including its unique ids and team class -->
                     <tr class="team3">
                         <td id="standing3" class="team3"></td>
                         <td id ="team3" class="team3" ></td>
@@ -94,7 +121,8 @@
                         <td id ="gd3" class="team3" ></td>
                         <td id ="pts3" class="team3" ></td>
                     </tr>
-                      
+                     
+                    <!-- Code for the row for team 4, including its unique ids and team class -->
                     <tr class="team4">
                         <td id="standing4" class="team4"></td>
                         <td id ="team4" class="team4" ></td>
@@ -107,7 +135,8 @@
                         <td id ="gd4" class="team4" ></td>
                         <td id ="pts4" class="team4" ></td>
                     </tr>
-                      
+                     
+                    <!-- Code for the row for team 5, including its unique ids and team class -->
                     <tr class="team5">
                         <td id="standing5" class="team5"></td>
                         <td id ="team5" class="team5" ></td>
@@ -121,6 +150,7 @@
                         <td id ="pts5" class="team5" ></td>
                     </tr>
                       
+                    <!-- Code for the row for team 6, including its unique ids and team class -->
                     <tr class="team6">
                         <td id="standing6" class="team6"></td>
                         <td id ="team6" class="team6" ></td>
@@ -134,6 +164,7 @@
                         <td id ="pts6" class="team6" ></td>
                     </tr>
                       
+                    <!-- Code for the row for team 7, including its unique ids and team class -->
                     <tr class="team7">
                         <td id="standing7" class="team7"></td>
                         <td id ="team7" class="team7" ></td>
@@ -147,6 +178,7 @@
                         <td id ="pts7" class="team7" ></td>
                     </tr>
                       
+                    <!-- Code for the row for team 8, including its unique ids and team class -->
                     <tr class="team8">
                         <td id="standing8" class="team8"></td>
                         <td id ="team8" class="team8" ></td>
@@ -159,7 +191,8 @@
                         <td id ="gd8" class="team8" ></td>
                         <td id ="pts8" class="team8" ></td>
                     </tr>
-                      
+                     
+                    <!-- Code for the row for team 9, including its unique ids and team class -->
                     <tr class="team9">
                         <td id="standing9" class="team9"></td>
                         <td id ="team9" class="team9" ></td>
@@ -173,6 +206,7 @@
                         <td id ="pts9" class="team9" ></td>
                     </tr>
                       
+                    <!-- Code for the row for team 10, including its unique ids and team class -->
                     <tr class="team10">
                         <td id="standing10" class="team10"></td>
                         <td id ="team10" class="team10" ></td>
@@ -185,7 +219,8 @@
                         <td id ="gd10" class="team10" ></td>
                         <td id ="pts10" class="team10" ></td>
                     </tr>
-                      
+                     
+                    <!-- Code for the row for team 11, including its unique ids and team class -->
                     <tr class="team11">
                         <td id="standing11" class="team11"></td>
                         <td id ="team11" class="team11" ></td>
@@ -199,6 +234,7 @@
                         <td id ="pts11" class="team11" ></td>
                     </tr>
                       
+                    <!-- Code for the row for team 12, including its unique ids and team class -->
                     <tr class="team12">
                         <td id="standing12" class="team12"></td>
                         <td id ="team12" class="team12" ></td>
@@ -212,6 +248,7 @@
                         <td id ="pts12" class="team12" ></td>
                     </tr>
                       
+                    <!-- Code for the row for team 13, including its unique ids and team class -->
                     <tr class="team13">
                         <td id="standing13" class="team13"></td>
                         <td id ="team13" class="team13" ></td>
@@ -225,6 +262,7 @@
                         <td id ="pts13" class="team13" ></td>
                     </tr>
                       
+                    <!-- Code for the row for team 14, including its unique ids and team class -->
                     <tr class="team14">
                         <td id="standing14" class="team14"></td>
                         <td id ="team14" class="team14" ></td>
@@ -237,7 +275,8 @@
                         <td id ="gd14" class="team14" ></td>
                         <td id ="pts14" class="team14" ></td>
                     </tr>
-                      
+                     
+                    <!-- Code for the row for team 15, including its unique ids and team class -->
                     <tr class="team15">
                         <td id="standing15" class="team15"></td>
                         <td id ="team15" class="team15" ></td>
@@ -251,6 +290,7 @@
                         <td id ="pts15" class="team15" ></td>
                     </tr>
                       
+                    <!-- Code for the row for team 16, including its unique ids and team class -->
                     <tr class="team16">
                         <td id="standing16" class="team16"></td>
                         <td id ="team16" class="team16" ></td>
@@ -264,6 +304,7 @@
                         <td id ="pts16" class="team16" ></td>
                     </tr>
                       
+                    <!-- Code for the row for team 17, including its unique ids and team class -->
                     <tr class="team17">
                         <td id="standing17" class="team17"></td>
                         <td id ="team17" class="team17" ></td>
@@ -277,6 +318,7 @@
                         <td id ="pts17" class="team17" ></td>
                     </tr>
 
+                    <!-- Code for the row for team 18, including its unique ids and team class -->
                     <tr class="team18">
                         <td id="standing18" class="team18"></td>
                         <td id ="team18" class="team18" ></td>
@@ -290,32 +332,37 @@
                         <td id ="pts18" class="team18" ></td>
                     </tr>
 
-                <tr class="team19">
-                    <td id="standing19" class="team19"></td>
-                    <td id ="team19" class="team19" ></td>
-                    <td id ="w19" class="team19" ></td>
-                    <td id ="d19" class="team19" ></td>
-                    <td id ="l19" class="team19" ></td>
-                    <td id ="err1" class="team1" ></td>
-                    <td id ="gf19" class="team19" ></td>
-                    <td id ="ga19" class="team19" ></td>
-                    <td id ="gd19" class="team19" ></td>
-                    <td id ="pts19" class="team19" ></td>
-                </tr>
+                    <!-- Code for the row for team 19, including its unique ids and team class -->
+                    <tr class="team19">
+                        <td id="standing19" class="team19"></td>
+                        <td id ="team19" class="team19" ></td>
+                        <td id ="w19" class="team19" ></td>
+                        <td id ="d19" class="team19" ></td>
+                        <td id ="l19" class="team19" ></td>
+                        <td id ="err1" class="team1" ></td>
+                        <td id ="gf19" class="team19" ></td>
+                        <td id ="ga19" class="team19" ></td>
+                        <td id ="gd19" class="team19" ></td>
+                        <td id ="pts19" class="team19" ></td>
+                    </tr>
 
-                <tr class="team20">
-                    <td id="standing20" class="team20"></td>
-                    <td id ="team20" class="team20" ></td>
-                    <td id ="w20" class="team20" ></td>
-                    <td id ="d20" class="team20" ></td>
-                    <td id ="l20" class="team20" ></td>
-                    <td id ="err1" class="team1" ></td>
-                    <td id ="gf20" class="team20" ></td>
-                    <td id ="ga20" class="team20" ></td>
-                    <td id ="gd20" class="team20" ></td>
-                    <td id ="pts20" class="team20" ></td>
-                </tr>
-              </table>
+                    <!-- Code for the row for team 20, including its unique ids and team class -->
+                    <tr class="team20">
+                        <td id="standing20" class="team20"></td>
+                        <td id ="team20" class="team20" ></td>
+                        <td id ="w20" class="team20" ></td>
+                        <td id ="d20" class="team20" ></td>
+                        <td id ="l20" class="team20" ></td>
+                        <td id ="err1" class="team1" ></td>
+                        <td id ="gf20" class="team20" ></td>
+                        <td id ="ga20" class="team20" ></td>
+                        <td id ="gd20" class="team20" ></td>
+                        <td id ="pts20" class="team20" ></td>
+                    </tr>
+                </table>
+
+                <!-- Code for the text to describe the definitions of any abbreviations that the user may not be able to understand -->
+                <p class="instructions" >Abbreviations and Definitions    Make a new CSS thing to center table      Describe doing this in the development thing</p>
 
               
 
