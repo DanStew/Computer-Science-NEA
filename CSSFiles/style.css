@@ -70,3 +70,9 @@ button {
   .gap{
     padding-bottom : 20px;
   }
+
+  .abbreviations{
+    color: red;
+    font-size: 16px;
+    margin: 5px;
+  }

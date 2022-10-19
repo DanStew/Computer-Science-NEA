@@ -1,25 +1,32 @@
 //Function to set up the table setup page page with all of the code for it
 function tableSetup(){
+
+    //Code to make an array of the team objects
     let teamNmbs = remakeObjects();
+
+    //Code to collect the amount of teams inputted from form 1
     let teamNmb = JSON.parse(localStorage.getItem("teamNmb"))
     let nmb = teamNmb
     nmb++
-    for (i=nmb ; i<= 20 ; i++){
-        document.getElementById("button"+i).style.visibility = "hidden"
-    }
 
     //For loop to input all of the information from the objects into the table
     for (i=1 ; i<= teamNmb ; i++){
         document.getElementById("standing"+i).innerHTML = teamNmbs[i-1].getStanding();
-        document.getElementById("team"+i).innerHTML = teamNmbs[i-1].getTeamName();
+        document.getElementById("teamName"+i).innerHTML = teamNmbs[i-1].getTeamName();
         document.getElementById("button"+i).innerHTML = teamNmbs[i-1].getTeamName();
-        document.getElementById("w"+i).innerHTML = teamNmbs[i-1].getWins();
-        document.getElementById("d"+i).innerHTML = teamNmbs[i-1].getDraws();
-        document.getElementById("l"+i).innerHTML = teamNmbs[i-1].getLosses();
-        document.getElementById("ga"+i).innerHTML = teamNmbs[i-1].getGf();
-        document.getElementById("gd"+i).innerHTML = teamNmbs[i-1].getGa();
-        document.getElementById("pts"+i).innerHTML = teamNmbs[i-1].getGd();
-        document.getElementById("gf"+i).innerHTML = teamNmbs[i-1].getPts();
+        document.getElementById("wins"+i).innerHTML = teamNmbs[i-1].getWins();
+        document.getElementById("draws"+i).innerHTML = teamNmbs[i-1].getDraws();
+        document.getElementById("losses"+i).innerHTML = teamNmbs[i-1].getLosses();
+        document.getElementById("goalsAgainst"+i).innerHTML = teamNmbs[i-1].getGf();
+        document.getElementById("goalDifference"+i).innerHTML = teamNmbs[i-1].getGa();
+        document.getElementById("points"+i).innerHTML = teamNmbs[i-1].getGd();
+        document.getElementById("goalsFor"+i).innerHTML = teamNmbs[i-1].getPts();
+    }
+
+    //Code to hide all buttons which are out of the range of the number of teams entered
+    //Ie if user input teamNmb = 8, the website doesn't need to show the button for team 20
+    for (i=nmb ; i<= 20 ; i++){
+        document.getElementById("button"+i).style.visibility = "hidden"
     }
 }
 
