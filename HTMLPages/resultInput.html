@@ -14,6 +14,8 @@
     <link rel="stylesheet" type="text/css" href="/CSSFiles/style.css" media="screen">
     
   </head>
+
+  <!-- Onload function to set up all of the information that will appear in the div elements in the select options  -->
   <body onload="form3Setup()">
     <h1>Fixture Generator</h1>
 
@@ -41,7 +43,12 @@
 
     <!-- The HTML code needed for the form to be submitted on this page-->
     <div></div>
+
+    <!-- Form to collect the fixture name, and result of the selected fixture for the website -->
+    <!-- This allows users to input results into the website that can then be processed -->
+    <!-- the onSubmit formSubmit3() function is there to process the results that have been submitted -->
     <form onSubmit="return formSubmit3()">
+      
             <!-- Select statement to show all of the fixtures needed for the tournaments -->
             <!-- There are 380 options as that is the maximum amount that will be generated, when there are 20 teams in a round robin tournament -->
             <select id="fixtureSelected">

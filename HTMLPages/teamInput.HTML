@@ -14,7 +14,10 @@
     <link rel="stylesheet" type="text/css" href="/CSSFiles/style.css" media="screen">
     
   </head>
+
+  <!-- Onload function to setup the select options in the form for the user to select -->
   <body onload="formSetup()">
+
     <h1>Fixture Generator</h1>
 
     <!-- This is the code to display the navbar that will appear at the top of the pages-->
@@ -40,6 +43,10 @@
 
     <!-- The HTML code needed for the form to be submitted on this page-->
     <div></div>
+
+    <!-- Form code for the user to be able to change the name of the team -->
+    <!-- The form will accept the team nmb and new name -->
+    <!-- The onSubmit function will process the inputs and change the name of the team -->
     <form onSubmit="return formSubmit2()">
             <select id="teamNmbSelected">
                 <option id="teamNmb1"></option>
