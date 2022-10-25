@@ -1,3 +1,4 @@
+//Initialising two of the key global variables on this page
 let tournamentType;
 let teamNmb;
 
@@ -8,8 +9,11 @@ function formSubmit1(){
 
     //Take the teamNmb and Passes it into the data validation function for that function
     teamNmb = document.getElementById("teamNmb").value;
+
     // This is so that this variable can be accessed in the different files of the website
     localStorage.setItem("teamNmb", JSON.stringify(teamNmb));
+
+    //Variable to store the result of the validation function for the teamNmb variable
     let checked = numberCheck(teamNmb);
 
     // This if statement reloads the page and exits the function to allow the user to enter a valid TeamNmb 
@@ -30,9 +34,13 @@ function formSubmit1(){
     return false;
 }
 
-// This is the function that makes sure that the TeamNmb meets the requirements
+// This is the function that makes sure that the TeamNmb meets the validation set
 function numberCheck(teamNmb){
+
+    //Collecting the type of tournament entered by the user
     let tournamentType = localStorage.getItem("tournamentType");
+
+    //Checking the validation of teamNmb for when it is a knockout tournament
     if (tournamentType == "knockout"){
         if (teamNmb == 2 || teamNmb == 4 || teamNmb == 8 || teamNmb == 16){}
         else{
@@ -40,6 +48,8 @@ function numberCheck(teamNmb){
             return false;
         }
     }
+
+    //Checking the validation for the teamNmb variable for when it is a round robin tournament
     if (teamNmb >= 2 && teamNmb<=20){
         return true;
     }
