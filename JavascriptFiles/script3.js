@@ -393,48 +393,69 @@ function getSemiTeams(){
 //Code to generate the names of the teams in the final
 function getFinalTeams(){
 
+    //Code to get the number of final team that the system is currently processing
     localStorage.setItem("finalNmb", JSON.stringify(0))
 
+    //Code to recreate the object array to be used and Collect the number of teams in the tournament
     let teamNmbs = remakeObjects();
     let teamNmb = JSON.parse(localStorage.getItem("teamNmb"));
+
+    //Creating the array to store the team names of the teams that got into the final
     let finalTeams = new Array(2);
+
     //Goes through all of the objects to see whether final is 1 and therefore they are in the final
     for (i=0 ; i<= teamNmb-1 ; i++){
+        //Checking the status of the final attribute of all teams in the tournament
         let finalCheck = teamNmbs[i].getFinal();
+        //Checking to see if it is one (They have reached the final)
         if (finalCheck == 1 ){
             let finalNmb = JSON.parse(localStorage.getItem("finalNmb"));
             if (finalNmb == null){
                 finalNmb = 0;
             }
+            //Putting the name of the team that got to the final in the correct position in the array
             finalTeams[finalNmb] = teamNmbs[i].getTeamName();
+
+            //Incrementing and Storing the finalNmb variable
             finalNmb++
             localStorage.setItem("finalNmb" , JSON.stringify(finalNmb))
         }
     }
+    //Returning the array of teams that got to the final
     return finalTeams;
 }
 
 //Code to generate the name of the champion
 function getChampion(){
+    //Recreating the object array to be used and Collecting the number of teams in the tournament
     let teamNmbs = remakeObjects();
     let teamNmb = JSON.parse(localStorage.getItem("teamNmb"));
+    
+    //Making the variable to store the team name of the champion
     let champion;
     
     //Goes through all of the objects to see whether champion is 1 and therefore they are the champion
     for (i=0 ; i<= teamNmb-1 ; i++){
+        //Checking the status of the champion attribute of each team
         let championCheck = teamNmbs[i].getChampion();
         if (championCheck == 1 ){
+            //Setting the value of champion to the team name is champion is 1 (TRUE)
             champion = teamNmbs[i].getTeamName();
         }
     }
+    //Returning the champion variable
     return champion;
 }
 
 //Code to check which of the two websites should be run
 function checkWebsite(){
+    //Setting a reload variable to true to make sure that the page is reloaded (So that all contents supposed to be on the page is loaded)
     localStorage.setItem("reload", "true")
 
+    //Collecting the tournament type of the tournament
     let tournamentType = localStorage.getItem("tournamentType")
+
+    //Checking the tourament type to load the user to the correct website for the tournament
     if (tournamentType == "knockout"){
         window.location.href = "Knockoutr16.html"
     }
@@ -446,7 +467,12 @@ function checkWebsite(){
 
 //Test function to set the values for the fixture list to check
 function setValues(){
+    //Recreating the object array to be used
     let teamNmbs = remakeObjects();
+
+    //Changing the values of some of the attributes in the objects so that the knockout fixture functions can be tested 
+    //Ie Check that the getFinalTeams() function works properly
+    //This has to be done as currently the system has no way of processing results
     teamNmbs[0].setQuarter();
     teamNmbs[1].setQuarter();
     teamNmbs[2].setQuarter();
@@ -463,12 +489,18 @@ function setValues(){
     teamNmbs[1].setFinal();
     teamNmbs[0].setFinal();
     teamNmbs[0].setChampion();
+
+    //Storing the object array (With the new values)
     storeObjects(teamNmbs);
 }
 
 //Function to hide the parts of the knockout tournament in which aren't needed
 function hideSection(){
+    //Collecting the number of teams in the tournament
     let teamNmb = JSON.parse(localStorage.getItem("teamNmb"));
+
+    //Checking the teamNmb of the tournament and hiding an elements of a knockout tournament that won't be needed
+    //Ie in a knockout tournament of two, you don't need to see the round of 16 fixtures, as there aren't any
     if (teamNmb == 2){
         document.getElementById("ex1-tab-1").style.visibility = "hidden"
         document.getElementById("ex1-tab-2").style.visibility = "hidden"
@@ -484,11 +516,19 @@ function hideSection(){
 }
 
 //The function to store all of the attributes of the objects in the array to local storage so they can be saved
+//This is done so that the information can be used later to remake the objects in a different function
 function storeObjects(objectArray){
+
+    //Code to collect the number of teams in the tournament and the tournament type
     let teamNmb = JSON.parse(localStorage.getItem("teamNmb"))
     let tournamentType = localStorage.getItem("tournamentType");
+
+    //Testing to check the type of tournament it is 
+    //This is done as the different tournament types have different variable that they'll have to store 
     if (tournamentType == "knockout"){
+        //Looping through all of the number of teams in the array 
         for (let i=1 ; i<=teamNmb ; i++){
+            //Storing all of the information from the object into local storing so that is can be collected later
             localStorage.setItem("TeamNmb" + i + "Nmb", objectArray[i-1].getTeamNmb())
             localStorage.setItem("TeamNmb" + i + "NmbCounter", JSON.stringify(objectArray[i-1].getTeamNmbCounter()))
             localStorage.setItem("TeamNmb" + i + "Name", objectArray[i-1].getTeamName())
@@ -496,11 +536,13 @@ function storeObjects(objectArray){
             localStorage.setItem("TeamNmb" + i + "Semi", objectArray[i-1].getSemi())
             localStorage.setItem("TeamNmb" + i + "Final", objectArray[i-1].getFinal())
             localStorage.setItem("TeamNmb" + i + "Champion", objectArray[i-1].getChampion())
-            localStorage.setItem("TeamNmb" + i + "Champion", objectArray[i-1].getStanding())
         }
     }
+    //Testing to check the type of tournament it is 
     else{
+        //Looping through all of the number of teams in the array 
         for (let i=1 ; i<=teamNmb ; i++){
+            //Storing all of the information from the object into local storing so that is can be collected later
             localStorage.setItem("TeamNmb" + i + "Nmb", objectArray[i-1].getTeamNmb())
             localStorage.setItem("TeamNmb" + i + "NmbCounter", JSON.stringify(objectArray[i-1].getTeamNmbCounter()))
             localStorage.setItem("TeamNmb" + i + "Name", objectArray[i-1].getTeamName())
@@ -516,13 +558,20 @@ function storeObjects(objectArray){
     }
 }
 
-//Function to put back together the array of instances of the class with the saved data
+//Function to put back together the array of instances of the class with the saved data made from the storeObjects function
 function remakeObjects(){
+    //Code to store the tournament type and number of teams in the array
     let tournamentType = localStorage.getItem("tournamentType");
     let teamNmb = JSON.parse(localStorage.getItem("teamNmb"))
+
+    //Code to make the array for the objects to be stored in 
     let teamNmbs = new Array(teamNmb)
+
+    //Code to check the type of tournament that we are in
     if (tournamentType == "knockout"){
+        //Code to loop through all of the teams in the tournament
         for (i=1 ; i<=teamNmb ; i++){
+            //Code to collect all of the information stored in local storage from the storeObjects function and store them in separate variables
             let  pTeamNmb= localStorage.getItem("TeamNmb" + i + "Nmb")
             let  pTeamNmbCounter= JSON.parse(localStorage.getItem("TeamNmb" + i + "NmbCounter"))
             let  pTeamName= localStorage.getItem("TeamNmb" + i + "Name")
@@ -530,11 +579,15 @@ function remakeObjects(){
             let  pSemi= localStorage.getItem("TeamNmb" + i + "Semi")
             let  pFinal= localStorage.getItem("TeamNmb" + i + "Final")
             let  pChampion= localStorage.getItem("TeamNmb" + i + "Champion")
+            //Code to use the previously collected variables to make the object for each team and then store them in the object array
             teamNmbs[i-1] = new knockoutTeam(pTeamNmb, pTeamNmbCounter, pTeamName, pQuarter, pSemi, pFinal, pChampion);
         }
     }
+    //Code to check the tournament type we are in for whether it is a round robin tournament
     else{
+        //Code to loop through all of the teams in the tournament
         for (i=1 ; i<=teamNmb ; i++){
+            //Code to collect all of the information stored in local storage from the storeObjects function and store them in separate variables
             let  pTeamNmb= localStorage.getItem("TeamNmb" + i + "Nmb")
             let  pTeamNmbCounter= JSON.parse(localStorage.getItem("TeamNmb" + i + "NmbCounter"))
             let  pTeamName= localStorage.getItem("TeamNmb" + i + "Name")
@@ -546,8 +599,10 @@ function remakeObjects(){
             let  pGf= JSON.parse(localStorage.getItem("TeamNmb" + i + "Gf"))
             let  pGa= JSON.parse(localStorage.getItem("TeamNmb" + i + "Ga"))
             let  pGd= JSON.parse(localStorage.getItem("TeamNmb" + i + "Gd"))
+            //Code to make the object from the separate variables and then store them in the object array
             teamNmbs[i-1] = new roundTeam(pTeamNmb, pTeamNmbCounter, pTeamName, pStanding, pWins, pDraws, pLosses, pPts, pGf, pGa, pGd)
         } 
     }
+    //Returning the object array so that they can be used from where this function was called
     return teamNmbs
 }
