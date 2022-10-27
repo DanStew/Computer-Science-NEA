@@ -1,10 +1,14 @@
 //Function to set up the form for the webpage
 function formSetup(){
 
-    // Code to collect the arrayCounter and teamNmbs from local storage
+    // Code to collect the arrayCounter from local storage
     let arrayCounter = JSON.parse(localStorage.getItem("arrayCounter"));
-    let teamNmb = JSON.parse(localStorage.getItem("teamNmb"));
+
+    //Code to collect the tournament type and number of teams from local storage
     let tournamentType = localStorage.getItem("tournamentType")
+    let teamNmb = JSON.parse(localStorage.getItem("teamNmb"));
+
+    //Initialising the object array as it will need to be used globally
     let teamNmbs;
 
 

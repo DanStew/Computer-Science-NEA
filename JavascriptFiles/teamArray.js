@@ -1,4 +1,4 @@
-//Class to make the superclass for the new subclass 
+//Class to make the superclass for the new subclasses
 class teamArray{
 
     //Constructor to initialise all the attributes for this class

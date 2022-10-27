@@ -2,6 +2,7 @@
 let tournamentType;
 let teamNmb;
 
+//The form to deal with the inputs of the first form
 function formSubmit1(){
     //This is the code to take the tournamentType entered from the form
     tournamentType = document.getElementById("type").value;

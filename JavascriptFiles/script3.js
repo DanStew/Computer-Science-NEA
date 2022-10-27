@@ -157,8 +157,6 @@ function generateKnockout(){
 //Function to generate and display the fixtures onto the website
 function displayFixtures(){
 
-    //Function to generate the fixtures
-
     //Setting default values to test this that this code is working correctly
     //This will be changed when we get to the point where results can be processed
     setValues();
