@@ -74,7 +74,7 @@ class roundTeam extends teamArray{
     }
 
     setPts(){
-        wPts = this.pts * 3
+        let wPts = this.wins * 3
         this.pts = wPts + this.draws;
     }
 

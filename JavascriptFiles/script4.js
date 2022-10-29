@@ -67,12 +67,16 @@ function formSubmit3(){
     fixtureNmb = "fixture" + (fixtureNmb);
 
     //Collects the goals from the inputs
-    homeGoals = document.getElementById("homeGoals").value;
-    awayGoals = document.getElementById("awayGoals").value;
+    //This code also converts the string that is collected from the form into an integer so that the variables can be used in calculations
+    homeGoalsInput = document.getElementById("homeGoals").value;
+    homeGoals = + homeGoalsInput;
+
+    awayGoalsInput = document.getElementById("awayGoals").value;
+    awayGoals = + awayGoalsInput;
 
     //Function to make sure that all the inputs in the form have been selected
     //Validating the inputs of the form
-    inputsCorrect = checkGoals(homeGoals, awayGoals)
+    inputsCorrect = checkGoals(homeGoalsInput, awayGoalsInput)
     fixtureCorrect = checkFixtures(fixture)
 
     //If statement to only continue if both validations are correct
@@ -219,19 +223,64 @@ function roundScoreProcess(fixture,homeGoals,awayGoals){
     //Processing the different occurences that could happen in a result
     //Home Win
     if (homeGoals > awayGoals){
-        console.log(homeTeamObject.getTeamName());
-        console.log(awayTeamObject.getTeamName());
-    }
-    //Draw
-    else if (homeGoals == awayGoals){
+
+        //Code to update the attributes of the home team's object
+        homeTeamObject.setWins();
+        homeTeamObject.setGf(homeGoals);
+        homeTeamObject.setGa(awayGoals);
+        homeTeamObject.setGd();
+        homeTeamObject.setPts();
+ 
+        //Code to update the attributes of the away teams object
+        awayTeamObject.setLosses();
+        awayTeamObject.setGf(awayGoals);
+        awayTeamObject.setGa(homeGoals);
+        awayTeamObject.setGd();
 
     }
+
+    //Draw
+    else if (homeGoals == awayGoals){
+     
+        //Code to update the attributes of the home team's object
+        homeTeamObject.setDraws();
+        homeTeamObject.setGf(homeGoals);
+        homeTeamObject.setGa(awayGoals);
+        homeTeamObject.setGd();
+        homeTeamObject.setPts();
+
+        //Code to update the attributes of the away team's object
+        awayTeamObject.setDraws();
+        awayTeamObject.setGf(homeGoals);
+        awayTeamObject.setGa(awayGoals);
+        awayTeamObject.setGd();
+        awayTeamObject.setPts();
+
+    }
+
     //Away Win
     else{
 
+        //Code to update the attributes of the home team's object
+        homeTeamObject.setLosses();
+        homeTeamObject.setGf(homeGoals);
+        homeTeamObject.setGa(awayGoals);
+        homeTeamObject.setGd();
+
+        //Code to update the attributes of the away team's object
+        awayTeamObject.setWins();
+        awayTeamObject.setGf(homeGoals);
+        awayTeamObject.setGa(awayGoals);
+        awayTeamObject.setGd();
+        awayTeamObject.setPts();
+
     }
+
+    //Code to update the standing in the table, as a result of the score that has just been submitted
+    updateStanding(teamNmbs)
+
     //Storing the object array so that the the changes that have been made can be carried on
-    storeObjects()
+    storeObjects(teamNmbs)
 }
 
 //Function to process the results in a knockout tournament
@@ -265,6 +314,61 @@ function findKnockoutAmount(){
         amount = 1; 
         return amount;
     }
+}
+
+//Function to update the standing attributes in the object by comparing the points and sorting them by number
+function updateStanding(objectArray){
+
+    //Collecting the number of teams in the tournament
+    let teamNmb = JSON.parse(localStorage.getItem("teamNmb")); 
+
+    //Creating a 2d array to store the name of the team and the points that they have
+
+    //Creating the overall 2d array
+    let pointsArray = new Array(teamNmb);
+
+    //Creating mini array within the array (To act as if it was a 2d array)
+    for (i=0 ; i<= teamNmb-1 ; i++){
+        //Making the mini arrays
+        pointsArray[i] = new Array(2)
+
+        //Inputting the data into the mini arrays (within the larger array)
+        pointsArray[i][0] = objectArray[i].getTeamName();
+        pointsArray[i][1] = objectArray[i].getPts();
+    }
+
+    //Commencing a bubble sort on the pts totals in the array, to get them in order
+    //Outer Loop
+    for (i=0 ; i<= teamNmb-2 ; i++){
+        //Creating a swapped variable to increase the efficiency of the function
+        let swapped = false
+        //Inner Loop
+        for(j=1 ; j<= teamNmb-1-i ; j++){
+            //Sorting the numbers in descending order, so the team with the most points appear at the top
+            if (pointsArray[j-1][1] < pointsArray[j][1]){
+                
+                //Storing the temporary variables of the two things in the 2d array
+                tempName = pointsArray[j][0]
+                tempPts = pointsArray[j][1]
+
+                //Swapping the variables 
+                pointsArray[j][0] = pointsArray[j-1][0]
+                pointsArray[j][1] = pointsArray[j-1][1]
+                pointsArray[j-1][0] = tempName
+                pointsArray[j-1][1] = tempPts
+
+                //Setting the swapped variable to true
+                swapped = true
+            }
+        }
+
+        //Making sure that the variable has been swapped
+        if (swapped == false){
+            break;
+        }
+    }
+
+    
 }
 
 
@@ -426,9 +530,10 @@ function storeObjects(objectArray){
     //Testing to check the type of tournament it is 
     else{
         //Looping through all of the number of teams in the array 
-        for (let i=1 ; i<=teamNmb ; i++){
+        for (let i=1 ; i<=teamNmb-1 ; i++){
+            console.log("Entered")
             //Storing all of the information from the object into local storing so that is can be collected later
-            localStorage.setItem("TeamNmb" + i + "Nmb", objectArray[i-1].getTeamNmb())
+            localStorage.setItem("TeamNmb" + i + "Nmb", JSON.stringify(objectArray[i-1].getTeamNmb()))
             localStorage.setItem("TeamNmb" + i + "NmbCounter", JSON.stringify(objectArray[i-1].getTeamNmbCounter()))
             localStorage.setItem("TeamNmb" + i + "Name", objectArray[i-1].getTeamName())
             localStorage.setItem("TeamNmb" + i + "Standing", JSON.stringify(objectArray[i-1].getStanding()))

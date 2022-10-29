@@ -79,7 +79,7 @@
                     <!-- Each team also has its own individual class which groups all code and data for each individual team -->
                     <!-- The main benefit of this is that the information can be hidden from the user, using Javascript, in case the information isn't relevant or is blank -->
                     <!-- For instance, team 20's attributes would be empty in a 4 team round robin tournament, so there is no point of showing its information -->
-
+                    
                     <!-- Code for the row for team 1, including its unique ids and team class -->
                     <tr class="team1">
                       <td id="standing1" class="team1"></td>
@@ -87,6 +87,7 @@
                       <td id ="wins1" class="team1" ></td>
                       <td id ="draws1" class="team1" ></td>
                       <td id ="losses1" class="team1" ></td>
+                      <td id="error1" class="team1"></td>
                       <td id ="goalsFor1" class="team1" ></td>
                       <td id ="goalsAgainst1" class="team1" ></td>
                       <td id ="goalDifference1" class="team1" ></td>
@@ -100,6 +101,7 @@
                         <td id ="wins2" class="team2" ></td>
                         <td id ="draws2" class="team2" ></td>
                         <td id ="losses2" class="team2" ></td>
+                        <td id="error2" class="team2"></td>
                         <td id ="goalsFor2" class="team2" ></td>
                         <td id ="goalsAgainst2" class="team2" ></td>
                         <td id ="goalDifference2" class="team2" ></td>
@@ -113,6 +115,7 @@
                         <td id ="wins3" class="team3" ></td>
                         <td id ="draws3" class="team3" ></td>
                         <td id ="losses3" class="team3" ></td>
+                        <td id="error3" class="team3"></td>
                         <td id ="goalsFor3" class="team3" ></td>
                         <td id ="goalsAgainst3" class="team3" ></td>
                         <td id ="goalDifference3" class="team3" ></td>
@@ -126,6 +129,7 @@
                         <td id ="wins4" class="team4" ></td>
                         <td id ="draws4" class="team4" ></td>
                         <td id ="losses4" class="team4" ></td>
+                        <td id="error4" class="team4"></td>
                         <td id ="goalsFor4" class="team4" ></td>
                         <td id ="goalsAgainst4" class="team4" ></td>
                         <td id ="goalDifference4" class="team4" ></td>
@@ -139,6 +143,7 @@
                         <td id ="wins5" class="team5" ></td>
                         <td id ="draws5" class="team5" ></td>
                         <td id ="losses5" class="team5" ></td>
+                        <td id="error5" class="team5"></td>
                         <td id ="goalsFor5" class="team5" ></td>
                         <td id ="goalsAgainst5" class="team5" ></td>
                         <td id ="goalDifference5" class="team5" ></td>
@@ -152,6 +157,7 @@
                         <td id ="wins6" class="team6" ></td>
                         <td id ="draws6" class="team6" ></td>
                         <td id ="losses6" class="team6" ></td>
+                        <td id="error6" class="team6"></td>
                         <td id ="goalsFor6" class="team6" ></td>
                         <td id ="goalsAgainst6" class="team6" ></td>
                         <td id ="goalDifference6" class="team6" ></td>
@@ -165,6 +171,7 @@
                         <td id ="wins7" class="team7" ></td>
                         <td id ="draws7" class="team7" ></td>
                         <td id ="losses7" class="team7" ></td>
+                        <td id="error7" class="team7"></td>
                         <td id ="goalsFor7" class="team7" ></td>
                         <td id ="goalsAgainst7" class="team7" ></td>
                         <td id ="goalDifference7" class="team7" ></td>
@@ -178,6 +185,7 @@
                         <td id ="wins8" class="team8" ></td>
                         <td id ="draws8" class="team8" ></td>
                         <td id ="losses8" class="team8" ></td>
+                        <td id="error8" class="team8"></td>
                         <td id ="goalsFor8" class="team8" ></td>
                         <td id ="goalsAgainst8" class="team8" ></td>
                         <td id ="goalDifference8" class="team8" ></td>
@@ -191,6 +199,7 @@
                         <td id ="wins9" class="team9" ></td>
                         <td id ="draws9" class="team9" ></td>
                         <td id ="losses9" class="team9" ></td>
+                        <td id="error9" class="team9"></td>
                         <td id ="goalsFor9" class="team9" ></td>
                         <td id ="goalsAgainst9" class="team9" ></td>
                         <td id ="goalDifference9" class="team9" ></td>
@@ -204,6 +213,7 @@
                         <td id ="wins10" class="team10" ></td>
                         <td id ="draws10" class="team10" ></td>
                         <td id ="losses10" class="team10" ></td>
+                        <td id="error10" class="team10"></td>
                         <td id ="goalsFor10" class="team10" ></td>
                         <td id ="goalsAgainst10" class="team10" ></td>
                         <td id ="goalDifference10" class="team10" ></td>
@@ -217,6 +227,7 @@
                         <td id ="wins11" class="team11" ></td>
                         <td id ="draws11" class="team11" ></td>
                         <td id ="losses11" class="team11" ></td>
+                        <td id="error11" class="team11"></td>
                         <td id ="goalsFor11" class="team11" ></td>
                         <td id ="goalsAgainst11" class="team11" ></td>
                         <td id ="goalDifference11" class="team11" ></td>
@@ -230,6 +241,7 @@
                         <td id ="wins12" class="team12" ></td>
                         <td id ="draws12" class="team12" ></td>
                         <td id ="losses12" class="team12" ></td>
+                        <td id="error12" class="team12"></td>
                         <td id ="goalsFor12" class="team12" ></td>
                         <td id ="goalsAgainst12" class="team12" ></td>
                         <td id ="goalDifference12" class="team12" ></td>
@@ -243,6 +255,7 @@
                         <td id ="wins13" class="team13" ></td>
                         <td id ="draws13" class="team13" ></td>
                         <td id ="losses13" class="team13" ></td>
+                        <td id="error13" class="team13"></td>
                         <td id ="goalsFor13" class="team13" ></td>
                         <td id ="goalsAgainst13" class="team13" ></td>
                         <td id ="goalDifference13" class="team13" ></td>
@@ -256,6 +269,7 @@
                         <td id ="wins14" class="team14" ></td>
                         <td id ="draws14" class="team14" ></td>
                         <td id ="losses14" class="team14" ></td>
+                        <td id="error14" class="team14"></td>
                         <td id ="goalsFor14" class="team14" ></td>
                         <td id ="goalsAgainst14" class="team14" ></td>
                         <td id ="goalDifference14" class="team14" ></td>
@@ -269,6 +283,7 @@
                         <td id ="wins15" class="team15" ></td>
                         <td id ="draws15" class="team15" ></td>
                         <td id ="losses15" class="team15" ></td>
+                        <td id="error15" class="team15"></td>
                         <td id ="goalsFor15" class="team15" ></td>
                         <td id ="goalsAgainst15" class="team15" ></td>
                         <td id ="goalDifference15" class="team15" ></td>
@@ -282,6 +297,7 @@
                         <td id ="wins16" class="team16" ></td>
                         <td id ="draws16" class="team16" ></td>
                         <td id ="losses16" class="team16" ></td>
+                        <td id="error16" class="team16"></td>
                         <td id ="goalsFor16" class="team16" ></td>
                         <td id ="goalsAgainst16" class="team16" ></td>
                         <td id ="goalDifference16" class="team16" ></td>
@@ -295,6 +311,7 @@
                         <td id ="wins17" class="team17" ></td>
                         <td id ="draws17" class="team17" ></td>
                         <td id ="losses17" class="team17" ></td>
+                        <td id="error17" class="team17"></td>
                         <td id ="goalsFor17" class="team17" ></td>
                         <td id ="goalsAgainst17" class="team17" ></td>
                         <td id ="goalDifference17" class="team17" ></td>
@@ -308,6 +325,7 @@
                         <td id ="wins18" class="team18" ></td>
                         <td id ="draws18" class="team18" ></td>
                         <td id ="losses18" class="team18" ></td>
+                        <td id="error18" class="team18"></td>
                         <td id ="goalsFor18" class="team18" ></td>
                         <td id ="goalsAgainst18" class="team18" ></td>
                         <td id ="goalDifference18" class="team18" ></td>
@@ -321,6 +339,7 @@
                         <td id ="wins19" class="team19" ></td>
                         <td id ="draws19" class="team19" ></td>
                         <td id ="losses19" class="team19" ></td>
+                        <td id="error19" class="team19"></td>
                         <td id ="goalsFor19" class="team19" ></td>
                         <td id ="goalsAgainst19" class="team19" ></td>
                         <td id ="goalDifference19" class="team19" ></td>
@@ -334,6 +353,7 @@
                         <td id ="wins20" class="team20" ></td>
                         <td id ="draws20" class="team20" ></td>
                         <td id ="losses20" class="team20" ></td>
+                        <td id="error20" class="team20"></td>
                         <td id ="goalsFor20" class="team20" ></td>
                         <td id ="goalsAgainst20" class="team20" ></td>
                         <td id ="goalDifference20" class="team20" ></td>

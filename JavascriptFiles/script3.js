@@ -14,20 +14,27 @@ function tableSetup(){
         //For each variable in the object, the function to get that variae from the object will be called and then be outputted to the table
         document.getElementById("standing"+i).innerHTML = teamNmbs[i-1].getStanding();
         document.getElementById("teamName"+i).innerHTML = teamNmbs[i-1].getTeamName();
-        document.getElementById("button"+i).innerHTML = teamNmbs[i-1].getTeamName();
         document.getElementById("wins"+i).innerHTML = teamNmbs[i-1].getWins();
         document.getElementById("draws"+i).innerHTML = teamNmbs[i-1].getDraws();
         document.getElementById("losses"+i).innerHTML = teamNmbs[i-1].getLosses();
-        document.getElementById("goalsAgainst"+i).innerHTML = teamNmbs[i-1].getGf();
-        document.getElementById("goalDifference"+i).innerHTML = teamNmbs[i-1].getGa();
-        document.getElementById("points"+i).innerHTML = teamNmbs[i-1].getGd();
-        document.getElementById("goalsFor"+i).innerHTML = teamNmbs[i-1].getPts();
+        document.getElementById("goalsFor"+i).innerHTML = teamNmbs[i-1].getGf();
+        document.getElementById("goalsAgainst"+i).innerHTML = teamNmbs[i-1].getGa();
+        document.getElementById("goalDifference"+i).innerHTML = teamNmbs[i-1].getGd();
+        document.getElementById("points"+i).innerHTML = teamNmbs[i-1].getPts();
+
+        //Code to give the buttons on the right hand side their team names 
+        document.getElementById("button"+i).innerHTML = teamNmbs[i-1].getTeamName();
     }
 
     //Code to hide all buttons which are out of the range of the number of teams entered
     //Ie if user input teamNmb = 8, the website doesn't need to show the button for team 20
     for (i=nmb ; i<= 20 ; i++){
         document.getElementById("button"+i).style.visibility = "hidden"
+    }
+
+    //Code to hide the error column that I had in order to format the table correctly
+    for (i=0 ; i<=20 ; i++){
+        document.getElementById("error"+i).style.visibility = "hidden"
     }
 }
 
