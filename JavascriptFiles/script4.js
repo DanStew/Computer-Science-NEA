@@ -276,11 +276,13 @@ function roundScoreProcess(fixture,homeGoals,awayGoals){
 
     }
 
+    //Storing the object array so that the the changes that have been made can be carried on
+    storeObjects(teamNmbs)
+
     //Code to update the standing in the table, as a result of the score that has just been submitted
     updateStanding(teamNmbs)
 
-    //Storing the object array so that the the changes that have been made can be carried on
-    storeObjects(teamNmbs)
+    
 }
 
 //Function to process the results in a knockout tournament
@@ -321,6 +323,12 @@ function updateStanding(objectArray){
 
     //Collecting the number of teams in the tournament
     let teamNmb = JSON.parse(localStorage.getItem("teamNmb")); 
+
+    //Creating the object array to be used
+    let teamNmbs = remakeObjects();
+
+    //Initialising the teamObject
+    let teamObject;
 
     //Creating a 2d array to store the name of the team and the points that they have
 
@@ -368,7 +376,29 @@ function updateStanding(objectArray){
         }
     }
 
-    
+    //Collecting the team names from the array and then giving them the correct standing in the array 
+    for (i=0 ; i<= teamNmb-1 ; i++){
+        //Getting the name of the team from the pointsArray
+        let teamName = pointsArray[i][0];
+        //Comparing the name of the team to the names in the objects so that I can find the right object
+        for  (j=0 ; j<= teamNmb-1 ; j++){
+            //Getting the name of the team to compare
+            let teamCompare = teamNmbs[j].getTeamName();
+            //Comparing the two team names
+            if (teamName == teamCompare){
+                //Collecting and storing the object when these names meet
+                teamObject = teamNmbs[j]
+                break;
+            }
+        }
+
+        //Changing the standing of the teams object
+        teamObject.setStanding(i+1);
+
+    }
+
+    //Storing the changes that have been made
+    storeObjects(teamNmbs);
 }
 
 
