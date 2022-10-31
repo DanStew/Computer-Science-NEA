@@ -11,11 +11,50 @@ function form3Setup(){
     //Code to generate the fixtures and fixture amount for the different types of tournaments
     //Knockout
     if (tournamentType == "knockout"){
-        //Generating an array for all of the knockout fixtures 
-        fixtures = generateKnockout(teamNmb);
-        //Finding the amount of knockout games there needs to be 
-        amount = findKnockoutAmount();
+
+        //Code to collect the variables to see what stage the knockout tournament is on
+        let r16Pass = localStorage.getItem("r16Pass");
+        let quarterPass = localStorage.getItem("quarterPass");
+        let semiPass = localStorage.getItem("semiPass");
+        let finalPass = localStorage.getItem("finalPass");
+
+        //Code to check whether each stage of the tournament has been passed (Completed or not)
+        //Round of 16
+        if (r16Pass == "false"){
+            //If not passed, generate round of 16 fixtures
+            fixtures = generateR16();
+            //Setting the number of fixtures in the tournament
+            amount = 8;
+        }
+        //Quarter Final
+        else if (quarterPass == "false"){
+            //If not passed, generate quarter final fixtures
+            fixtures = generateQuarter();
+            //Setting the number of fixtures in the tournament
+            amount = 4;
+        }
+        //Semi Final
+        else if (semiPass == "false"){
+            //If not passed, generate semi final fixtures
+            fixture = generateSemi();
+            //Setting the number of fixtures in the tournament
+            amount  = 2;
+        }
+        //Final
+        else if (finalPass == "false"){
+            //If not passed, generate final fixture
+            fixture = generateFinal();
+            //Setting number of fixtures in the tournament
+            amount = 1;
+        }
+        //If all fixtures Passed
+        else{
+            fixture = "No remaining fixtures";
+            //Setting number of amount of fixtures in the tournament : This is 1 so it displays the message that no fixtures remain
+            amount = 1;
+        }
     }
+
     //Round Robin
     else{
         //Generating the array of all round robin games
@@ -149,6 +188,10 @@ function checkFixtures(fixture){
 
 //Function to collect the id of the option selected, so it can be hidden if neccesary
 function formIdCollect(fixtureNmb){
+
+    //Collecting the type of tournament from local storage
+    let tournamentType = localStorage.getItem("tournamentType");
+
     //Collecting the teamNmb of the tournament from local storage
     let teamNmb = JSON.parse(localStorage.getItem("teamNmb"));
 
@@ -169,6 +212,24 @@ function formIdCollect(fixtureNmb){
             break;
         }
     }
+
+    //Code to check if all the inputs of each stage of a knockout tournament have been entered
+    if (tournamentType == "knockout"){
+        if (hideFixtures[14] != undefined){
+            localStorage.setItem("finalPass", "true")
+        }
+        else if (hideFixtures[13] != undefined){
+            localStorage.setItem("semiPass", "true")
+        }
+        else if (hideFixtures[11] != undefined){
+            localStorage.setItem("quarterPass", "true")
+        }
+        else if (hideFixtures[7] != undefined){
+            localStorage.setItem("r16Pass", "true")
+        }
+        
+    }
+
     //Storing the hideFixtures array in local storage
     localStorage.setItem("hideFixtures", JSON.stringify(hideFixtures));
 }
@@ -287,9 +348,111 @@ function roundScoreProcess(fixture,homeGoals,awayGoals){
 
 //Function to process the results in a knockout tournament
 function knockoutScoreProcess(fixture,homeGoals, awayGoals){
+
+    //Code to make the object array to be used
+    let teamNmbs = remakeObjects();
+    console.log(teamNmbs)
+
     //Finding the names of the home and away teams in the tournament
     let homeTeam = returnHomeTeam(fixture);
+    alert(homeTeam)
     let awayTeam = returnAwayTeam(fixture);
+
+    //Initialising the home and away team objects so they can be used
+    let homeTeamObject;
+    let awayTeamObject;
+
+    //Code to find the object of the team with the correlated team name
+    //Looping through all objects in the object array
+    for (let i=0 ; i<= teamNmb-1; i++){
+        //Collecting the name of the object that is currenty being looked at
+        let objectTeamName = teamNmbs[i].getTeamName()
+        alert(objectTeamName + " i ")
+
+        //Comparing it with the home and away teams names to see if they are equal
+        //If they are equal, the object will be store with where the names match so that they can be used later
+        if (objectTeamName == homeTeam){
+            homeTeamObject = teamNmbs[i]
+        }
+        else if (objectTeamName == awayTeam){
+            awayTeamObject = teamNmbs[i]
+        }
+    }
+
+    //Function to find the stage of the tournament that the knockout tournament is in
+    let knockoutStage = findStage();
+
+    //Code to check the type of result it is (Home win or Away Win)
+    //There is no need to check for a draw as the validation of the goals in a knockout tournament mean that they can't be equal
+    
+    //Home Win
+    if (homeGoals > awayGoals){
+
+        alert(homeTeamObject)
+
+        //Changing the attribute of the home team 
+        //This is done by first checking the stage of the tournament that it is in, so that the correct attribute can be changed
+        if (knockoutStage == "r16"){
+            homeTeamObject.setQuarter();
+        }
+        else if (knockoutStage == "quarter"){
+            homeTeamObject.setSemi();
+        }
+        else if (knockoutStage == "semi"){
+            homeTeamObject.setFinal();
+        }
+        else if (knockoutStage == "final"){
+            homeTeamObject.setChampion();
+        }
+
+    }
+
+    //Away Win
+    else if (awayGoals > homeGoals){
+
+        //Changing the attribute of the away team 
+        //This is done by first checking the stage of the tournament that it is in, so that the correct attribute can be changed
+        if (knockoutStage == "r16"){
+            awayTeamObject.setQuarter();
+        }
+        else if (knockoutStage == "quarter"){
+            awayTeamObject.setSemi();
+        }
+        else if (knockoutStage == "semi"){
+            awayTeamObject.setFinal();
+        }
+        else if (knockoutStage == "final"){
+            awayTeamObject.setChampion();
+        }
+
+    }
+
+    //Code to store the objects 
+    storeObjects(teamNmbs);
+}
+
+//Function to find the current stage of the tournament that the team is on 
+function findStage(){
+
+    //Code to collect the collect the conditional variables of the stages 
+    let r16Pass = localStorage.getItem("r16Pass");
+    let quarterPass = localStorage.getItem("quarterPass");
+    let semiPass = localStorage.getItem("semiPass");
+    let finalPass = localStorage.getItem("finalPass");
+
+    //Comparing the boolean values of the boolean variables to see which stage the tournament is currently on
+    if (r16Pass == "false"){
+        return "r16";
+    }
+    else if (quarterPass == "false"){
+        return "quarter";
+    }
+    else if (semiPass == "false"){
+        return "semi";
+    }
+    else if (finalPass == "false"){
+        return "final";
+    }
 }
 
 //Finds the amount of fixtures in a knockout tournament
@@ -458,79 +621,82 @@ function generateRobin(){
     return fixtures;
 }
 
-//Function to get the array of fixtures needed for the knockout structure
-function generateKnockout(){
+//Function to generate the round of 16 fixtures in the tournament
+function generateR16(){
 
     //Code to remake the object array to be used
     let teamNmbs = remakeObjects();
 
-    //Code to get the teamNmb of he tournament and initialise the fixtures 
+    //Code to get the teamNmb of he tournament
     let teamNmb = JSON.parse(localStorage.getItem("teamNmb"));
-    let fixtures
 
-    //Code to generate the round of sixteen fixtures
-    // The document.URL.includes parts makes the code more efficient as it doesn't make all of the fixtures for all of the games it only makes the fixtures in which will be shown
-    if ((teamNmb >= 16) && (document.URL.includes("Knockoutr16")) ) {
+    //Creating the fixture array for the amount of fixtures in the knockout tournament
+    let fixtures = new Array(8)
 
-        //Creating the fixture array for the amount of fixtures in the knockout tournament
-        fixtures = new Array(8)
+    //Looping through to make all the fixtures to put into the fixtures array
+    for (let i=0 ; i<= 7 ; i++){
+        //Collecting the names of the teams to put into the fixture
+        let team1 = teamNmbs[i].getTeamName();
+        let nmb = teamNmb-(i+1);
+        let team2 = teamNmbs[nmb].getTeamName();
 
-        //Looping through to make all the fixtures to put into the fixtures array
-        for (let i=0 ; i<= 7 ; i++){
-            //Collecting the names of the teams to put into the fixture
-            let team1 = teamNmbs[i].getTeamName();
-            let nmb = teamNmb-(i+1);
-            let team2 = teamNmbs[nmb].getTeamName();
+        //Putting together the teams and put them into the fixture
+        let fixture = team1 + " v " + team2;
 
-            //Putting together the teams and put them into the fixture
-            let fixture = team1 + " v " + team2;
-
-            //Then putting the made fixture into the fixtures array 
-            fixtures[i] = fixture
-        }
-    }
-    
-    //Code to generate the fixtures for the quarter finals
-    if (teamNmb >= 8 && (document.URL.includes("Knockoutquarter"))){
-
-        //Creating the fixture array for the amount of fixtures in the knockout tournament
-        fixtures = new Array(4)
-
-        //Collecting the names of the teams that got into the quarter finals
-        let quarterTeams = getQuarterTeams();
-
-        //Code to make the fixtures for the quarter finals and then put them into the fixture array
-        fixtures[0] = quarterTeams[0] + " v " + quarterTeams[7]
-        fixtures[1] = quarterTeams[1] + " v " + quarterTeams[6]
-        fixtures[2] = quarterTeams[2] + " v " + quarterTeams[5]
-        fixtures[3] = quarterTeams[3] + " v " + quarterTeams[4]
-    }
-    
-    //Code to generate the fixtures for the semiFinals
-    if (teamNmb >= 4 && (document.URL.includes("Knockoutsemi"))){
-
-        //Code to make the fixtures array for this stage of the tournament
-        fixtures = new Array(2)
-
-        //Collecting the names of the teams that progressed to this stage
-        let semiTeams = getSemiTeams();
-
-        //Code to make the fixtures from the teams that progessed this far and then putting them into the fixtures array
-        fixtures[0] = semiTeams[0] + " v " + semiTeams[3]
-        fixtures[1] = semiTeams[1] + " v " + semiTeams[2]
-    }
-    
-    //Code to generate the fixture for the final
-    //It isn't wrapped in a for loop as all knockout tournments will need this
-    if (document.URL.includes("Knockoutfinal")){
-        //Code to collect the names of the teams at this stage of the tournament
-        let finalTeams = getFinalTeams();
-
-        //Code to make the fixture for the final and putting into fixtures
-        fixtures = finalTeams[0] + " v " + finalTeams[1]
+        //Then putting the made fixture into the fixtures array 
+        fixtures[i] = fixture;
     }
 
-    //Returning the fixtures variable/array so they can be used wherever they were called
+    return fixtures; 
+}
+
+//Function to generate the fixtures for the quarter final stage of a knockout tournament
+function generateQuarter(){    
+
+    //Creating the fixture array for the amount of fixtures in the knockout tournament
+    let fixtures = new Array(4)
+
+    //Collecting the names of the teams that got into the quarter finals
+    let quarterTeams = getQuarterTeams();
+
+    //Code to make the fixtures for the quarter finals and then put them into the fixture array
+    fixtures[0] = quarterTeams[0] + " v " + quarterTeams[7]
+    fixtures[1] = quarterTeams[1] + " v " + quarterTeams[6]
+    fixtures[2] = quarterTeams[2] + " v " + quarterTeams[5]
+    fixtures[3] = quarterTeams[3] + " v " + quarterTeams[4]
+
+    //Returning the fixtures
+    return fixtures;
+}
+
+//Function to generate the fixtures for the semi final stage of the knockout tournament
+function generateSemi(){
+
+    //Code to make the fixtures array for this stage of the tournament
+    fixtures = new Array(2)
+
+    //Collecting the names of the teams that progressed to this stage
+    let semiTeams = getSemiTeams();
+
+    //Code to make the fixtures from the teams that progessed this far and then putting them into the fixtures array
+    fixtures[0] = semiTeams[0] + " v " + semiTeams[3]
+    fixtures[1] = semiTeams[1] + " v " + semiTeams[2]
+
+    //Returning the fixtures
+    return fixtures;
+
+}
+
+//Function to generate the fixtures for the final stage of the tournament
+function generateFinal(){
+
+    //Code to collect the names of the teams at this stage of the tournament
+    let finalTeams = getFinalTeams();
+
+    //Code to make the fixture for the final and putting into fixtures
+    fixtures = finalTeams[0] + " v " + finalTeams[1]
+
+    //Returning the fixtures
     return fixtures;
 }
 
@@ -624,5 +790,5 @@ function remakeObjects(){
         } 
     }
     //Returning the object array so that they can be used from where this function was called
-    return teamNmbs
+    return teamNmbs;
 }

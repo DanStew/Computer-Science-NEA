@@ -29,6 +29,12 @@ function formSubmit1(){
     // This is the code to store the arrayCounter variable in localStorage to be used in the next page
     localStorage.setItem("arrayCounter",JSON.stringify(1));
 
+    //Code to initialise some of the knockout tournament variables to be used later, to test what stage of the knockout tournament the system is on
+    localStorage.setItem("r16Pass", "false");
+    localStorage.setItem("quarterPass", "false");
+    localStorage.setItem("semiPass", "false");
+    localStorage.setItem("finalPass", "false");
+
     //The code below is used to load the user to the next page, as all that is needed from this page has been complete
     window.location.href = "teamInput.html";
 
