@@ -11,16 +11,22 @@ function tableSetup(){
 
     //For loop to input all of the information from the objects into the table
     for (i=1 ; i<= teamNmb ; i++){
-        //For each variable in the object, the function to get that variae from the object will be called and then be outputted to the table
-        document.getElementById("standing"+i).innerHTML = teamNmbs[i-1].getStanding();
-        document.getElementById("teamName"+i).innerHTML = teamNmbs[i-1].getTeamName();
-        document.getElementById("wins"+i).innerHTML = teamNmbs[i-1].getWins();
-        document.getElementById("draws"+i).innerHTML = teamNmbs[i-1].getDraws();
-        document.getElementById("losses"+i).innerHTML = teamNmbs[i-1].getLosses();
-        document.getElementById("goalsFor"+i).innerHTML = teamNmbs[i-1].getGf();
-        document.getElementById("goalsAgainst"+i).innerHTML = teamNmbs[i-1].getGa();
-        document.getElementById("goalDifference"+i).innerHTML = teamNmbs[i-1].getGd();
-        document.getElementById("points"+i).innerHTML = teamNmbs[i-1].getPts();
+        //Code to create an inner loop to check the standing of each teamNmb
+        for (j=1 ; j<= teamNmb ; j++){
+            //Collecting the standing number and comparing it to the row number
+            if (teamNmbs[j-1].getStanding() == i){
+                //For each variable in the object, the function to get that variae from the object will be called and then be outputted to the table
+                document.getElementById("standing"+i).innerHTML = teamNmbs[j-1].getStanding();
+                document.getElementById("teamName"+i).innerHTML = teamNmbs[j-1].getTeamName();
+                document.getElementById("wins"+i).innerHTML = teamNmbs[j-1].getWins();
+                document.getElementById("draws"+i).innerHTML = teamNmbs[j-1].getDraws();
+                document.getElementById("losses"+i).innerHTML = teamNmbs[j-1].getLosses();
+                document.getElementById("goalsFor"+i).innerHTML = teamNmbs[j-1].getGf();
+                document.getElementById("goalsAgainst"+i).innerHTML = teamNmbs[j-1].getGa();
+                document.getElementById("goalDifference"+i).innerHTML = teamNmbs[j-1].getGd();
+                document.getElementById("points"+i).innerHTML = teamNmbs[j-1].getPts();
+            }
+        }
 
         //Code to give the buttons on the right hand side their team names 
         document.getElementById("button"+i).innerHTML = teamNmbs[i-1].getTeamName();
@@ -83,7 +89,7 @@ function knockoutSetup(){
     //Code to generate and display the fixtures for the website to display
     setValues();
     displayFixtures();
-} 
+}
 
 //Function to get the array of fixtures needed for the knockout structure
 function generateKnockout(){
