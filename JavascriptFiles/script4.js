@@ -508,35 +508,29 @@ function updateStanding(objectArray){
         pointsArray[i][1] = objectArray[i].getPts();
     }
 
-    //Commencing a bubble sort on the pts totals in the array, to get them in order
-    //Outer Loop
-    for (i=0 ; i<= teamNmb-2 ; i++){
-        //Creating a swapped variable to increase the efficiency of the function
-        let swapped = false
-        //Inner Loop
-        for(j=1 ; j<= teamNmb-1-i ; j++){
-            //Sorting the numbers in descending order, so the team with the most points appear at the top
-            if (pointsArray[j-1][1] < pointsArray[j][1]){
-                
-                //Storing the temporary variables of the two things in the 2d array
-                tempName = pointsArray[j][0]
-                tempPts = pointsArray[j][1]
+    //Commencing an insertion sort on the pts totals in the array, to get them in order
+    //For loop to set i for the key
+    for (let i=1 ; i<= teamNmb-1 ; i++){
 
-                //Swapping the variables 
-                pointsArray[j][0] = pointsArray[j-1][0]
-                pointsArray[j][1] = pointsArray[j-1][1]
-                pointsArray[j-1][0] = tempName
-                pointsArray[j-1][1] = tempPts
+        //Collecting the key variables
+        //One for which is going to be compared and the other to store to be used later
+        let keyName = pointsArray[i][0];
+        let keyPoints = pointsArray[i][1];
 
-                //Setting the swapped variable to true
-                swapped = true
-            }
+        //Setting j to compare against
+        let j=i-1;
+        
+        //While looping to see if the previous element is less than the next element
+        //This insertion sort is in descending order 
+        while ((j>=0) && (pointsArray[j][1] <= keyPoints)){
+          //Swapping the values in the array if less than 
+          pointsArray[j+1][0] = pointsArray[j][0];
+          pointsArray[j+1][1] = pointsArray[j][1];
+          j= j-1;
         }
-
-        //Making sure that the variable has been swapped
-        if (swapped == false){
-            break;
-        }
+        //Setting the key variables to the next space in which 
+        pointsArray[j+1][0] = keyName;
+        pointsArray[j+1][1] = keyPoints;
     }
 
     //Collecting the team names from the array and then giving them the correct standing in the array 
