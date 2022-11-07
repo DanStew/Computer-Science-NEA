@@ -36,20 +36,21 @@ function form3Setup(){
         //Semi Final
         else if (semiPass == "false"){
             //If not passed, generate semi final fixtures
-            fixture = generateSemi();
+            fixtures = generateSemi();
             //Setting the number of fixtures in the tournament
             amount  = 2;
         }
         //Final
         else if (finalPass == "false"){
             //If not passed, generate final fixture
-            fixture = generateFinal();
+            fixtures = generateFinal();
             //Setting number of fixtures in the tournament
             amount = 1;
         }
         //If all fixtures Passed
         else{
-            fixture = "No remaining fixtures";
+            fixtures = new Array(1)
+            fixtures[0] = "No remaining fixtures";
             //Setting number of amount of fixtures in the tournament : This is 1 so it displays the message that no fixtures remain
             amount = 1;
         }
@@ -85,7 +86,7 @@ function form3Setup(){
         //Loop through all of the fixture amount (As this is the maximum that will need to be hidden)
         for (i=0 ; i<= amount-1 ; i++){
             //If hideFixtures array is storing something, then the fixture will be hidden
-            if (hideFixtures[i] != undefined){
+            if ((hideFixtures[i] != undefined)){
                 document.getElementById(hideFixtures[i]).style.display = "none";
                 //This is test text to make sure that the select options that should have been hidden are hidden
                 //This works as you will see this test in the select options if it didn't work and therefore you'd know there is an issue
@@ -121,9 +122,6 @@ function formSubmit3(){
     //If statement to only continue if both validations are correct
     if (inputsCorrect == true && fixtureCorrect == true){
 
-        //Function to tell the system that the fixture has already been selected, so it won't be shown again
-        formIdCollect(fixtureNmb);
-
         //Function to process the results from the scores inputted
         //Collecting the tournament type of the tournament
         let tournamentType = localStorage.getItem("tournamentType");
@@ -137,6 +135,9 @@ function formSubmit3(){
         else{
             roundScoreProcess(fixture,homeGoals, awayGoals);
         }
+
+        //Function to tell the system that the fixture has already been selected, so it won't be shown again
+        formIdCollect(fixtureNmb);
     }
     //Else (For when the validation of the inputs aren't correct)
     else{
@@ -215,16 +216,38 @@ function formIdCollect(fixtureNmb){
 
     //Code to check if all the inputs of each stage of a knockout tournament have been entered
     if (tournamentType == "knockout"){
-        if (hideFixtures[14] != undefined){
+
+        //Collecting the validation variables to check the stage of tournament it is currently on
+        let r16Pass = localStorage.getItem("r16Pass");
+        let quarterPass = localStorage.getItem("quarterPass");
+        let semiPass = localStorage.getItem("semiPass");
+        let finalPass = localStorage.getItem("finalPass")
+
+        //Checking to see if the final fixture has been played
+        if (finalPass == "true"){
+            hideFixtures= new Array(1)
+        }
+        //Checking to see if the final fixtures have passed
+        else if ((hideFixtures[0] != undefined) && (semiPass == "true")){
+            hideFixtures = new Array(1)
             localStorage.setItem("finalPass", "true")
         }
-        else if (hideFixtures[13] != undefined){
+        //Checking to see if the semi final fixtures have passed
+        else if ((hideFixtures[1] != undefined) && (quarterPass == "true")){
+            alert("semi pass true")
+            hideFixtures = new Array(1);
             localStorage.setItem("semiPass", "true")
         }
-        else if (hideFixtures[11] != undefined){
+        //Checking to see if finished quarter final fixtures
+        //It checks if the previous round has finished, and then checks if its own round has finished
+        //It then creates a new array to begin hiding the fixtures for the next round
+        else if ((hideFixtures[3] != undefined) && (r16Pass == "true")){
+            hideFixtures = new Array(2);
             localStorage.setItem("quarterPass", "true")
         }
+        //Checking to see if finished round of 16 fixtures
         else if (hideFixtures[7] != undefined){
+            hideFixtures = new Array(4);
             localStorage.setItem("r16Pass", "true")
         }
         
@@ -349,29 +372,33 @@ function roundScoreProcess(fixture,homeGoals,awayGoals){
 //Function to process the results in a knockout tournament
 function knockoutScoreProcess(fixture,homeGoals, awayGoals){
 
+    //Code to get the number of teams in the tournament
+    let teamNmb = JSON.parse(localStorage.getItem("teamNmb"))
+    
     //Code to make the object array to be used
     let teamNmbs = remakeObjects();
     console.log(teamNmbs)
 
     //Finding the names of the home and away teams in the tournament
     let homeTeam = returnHomeTeam(fixture);
-    alert(homeTeam)
     let awayTeam = returnAwayTeam(fixture);
 
     //Initialising the home and away team objects so they can be used
     let homeTeamObject;
     let awayTeamObject;
 
+    console.log("Home Team" + homeTeam)
+
     //Code to find the object of the team with the correlated team name
     //Looping through all objects in the object array
     for (let i=0 ; i<= teamNmb-1; i++){
         //Collecting the name of the object that is currenty being looked at
         let objectTeamName = teamNmbs[i].getTeamName()
-        alert(objectTeamName + " i ")
 
         //Comparing it with the home and away teams names to see if they are equal
         //If they are equal, the object will be store with where the names match so that they can be used later
         if (objectTeamName == homeTeam){
+            console.log("Stored")
             homeTeamObject = teamNmbs[i]
         }
         else if (objectTeamName == awayTeam){
@@ -388,7 +415,8 @@ function knockoutScoreProcess(fixture,homeGoals, awayGoals){
     //Home Win
     if (homeGoals > awayGoals){
 
-        alert(homeTeamObject)
+        //Checking to see what is stored within the homeTeamObject object
+        console.log(homeTeamObject);
 
         //Changing the attribute of the home team 
         //This is done by first checking the stage of the tournament that it is in, so that the correct attribute can be changed
@@ -409,6 +437,9 @@ function knockoutScoreProcess(fixture,homeGoals, awayGoals){
 
     //Away Win
     else if (awayGoals > homeGoals){
+
+        //Checking to see what is stored within the awayTeamObject object
+        console.log(awayTeamObject);
 
         //Changing the attribute of the away team 
         //This is done by first checking the stage of the tournament that it is in, so that the correct attribute can be changed
@@ -522,7 +553,7 @@ function updateStanding(objectArray){
         
         //While looping to see if the previous element is less than the next element
         //This insertion sort is in descending order 
-        while ((j>=0) && (pointsArray[j][1] <= keyPoints)){
+        while ((j>=0) && (pointsArray[j][1] < keyPoints)){
           //Swapping the values in the array if less than 
           pointsArray[j+1][0] = pointsArray[j][0];
           pointsArray[j+1][1] = pointsArray[j][1];
@@ -661,6 +692,7 @@ function generateQuarter(){
 
     //Returning the fixtures
     return fixtures;
+
 }
 
 //Function to generate the fixtures for the semi final stage of the knockout tournament
@@ -688,7 +720,9 @@ function generateFinal(){
     let finalTeams = getFinalTeams();
 
     //Code to make the fixture for the final and putting into fixtures
-    fixtures = finalTeams[0] + " v " + finalTeams[1]
+    //An array has been made for this in order to make sure that the fixture is treated the same as all other fixtures, and there are no errors that occur
+    fixtures = new Array(1)
+    fixtures[0] = finalTeams[0] + " v " + finalTeams[1]
 
     //Returning the fixtures
     return fixtures;
@@ -720,7 +754,7 @@ function storeObjects(objectArray){
     //Testing to check the type of tournament it is 
     else{
         //Looping through all of the number of teams in the array 
-        for (let i=1 ; i<=teamNmb-1 ; i++){
+        for (let i=1 ; i<=teamNmb ; i++){
             console.log("Entered")
             //Storing all of the information from the object into local storing so that is can be collected later
             localStorage.setItem("TeamNmb" + i + "Nmb", JSON.stringify(objectArray[i-1].getTeamNmb()))

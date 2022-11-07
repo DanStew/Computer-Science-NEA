@@ -40,7 +40,7 @@ function tableSetup(){
 
     //Code to hide the error column that I had in order to format the table correctly
     for (i=0 ; i<=20 ; i++){
-        document.getElementById("error"+i).style.visibility = "hidden"
+        //document.getElementById("error"+i).style.visibility = "hidden"
     }
 }
 
@@ -87,7 +87,6 @@ function knockoutSetup(){
     hideSection();
 
     //Code to generate and display the fixtures for the website to display
-    setValues();
     displayFixtures();
 }
 
@@ -169,10 +168,6 @@ function generateKnockout(){
 
 //Function to generate and display the fixtures onto the website
 function displayFixtures(){
-
-    //Setting default values to test this that this code is working correctly
-    //This will be changed when we get to the point where results can be processed
-    setValues();
 
     //Code to generate the fixtures to be outputted to the website
     let fixtures = generateKnockout();
