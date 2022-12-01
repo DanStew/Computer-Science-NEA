@@ -49,9 +49,9 @@ function numberCheck(teamNmb){
 
     //Checking the validation of teamNmb for when it is a knockout tournament
     if (tournamentType == "knockout"){
-        if (teamNmb == 2 || teamNmb == 4 || teamNmb == 8 || teamNmb == 16){}
+        if (teamNmb == 16){}
         else{
-            alert("Tournaments with a knockout structure only can have either 2 , 4, 8 or 16 teams in them");
+            alert("Tournaments with a knockout structure only can have 16 teams in them");
             return false;
         }
     }
